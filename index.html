@@ -315,43 +315,10 @@
         <h2 class="section-title" data-ar="اختاري كلاسكِ المناسب" data-en="Choose Your Class">اختاري كلاسكِ المناسب</h2>
         <p class="section-desc" data-ar="كل كلاس مصمم بعناية ليناسب احتياجاتكِ المختلفة." data-en="Each class is carefully designed to suit your different needs.">كل كلاس مصمم بعناية ليناسب احتياجاتكِ المختلفة.</p>
       </div>
-      <div class="programs-grid">
-        <div class="program-card reveal">
-          <div class="program-card-img"><img src="https://picsum.photos/seed/powerclass/500/350" alt="Power Yoga"><span class="program-level">Ladies Only</span></div>
-          <div class="program-card-body">
-            <h3>Power Yoga</h3>
-            <p style="display:flex;align-items:center;gap:6px;margin-bottom:10px;font-size:.82rem;color:var(--accent)"><i class="fa-solid fa-location-dot"></i> Royal Hills Clubhouse</p>
-            <p data-ar="تحدي جسدي مكثف يبني القوة والمرونة. تدفق سريع بين الوضعيات مع تنفس متزامن." data-en="An intense physical challenge that builds strength and flexibility with synchronized breathing.">تحدي جسدي مكثف يبني القوة والمرونة.</p>
-            <div style="display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--fg-muted);margin-bottom:16px"><i class="fa-regular fa-calendar"></i> <span data-ar="الأحد والأربعاء — 11 صباحاً" data-en="Sun & Wed — 11:00 AM">الأحد والأربعاء — 11 صباحاً</span></div>
-            <div class="program-meta">
-              <span><i class="fa-solid fa-ticket"></i> <span data-ar="جلسة: 400 ج.م" data-en="Session: 400 EGP">جلسة: 400 ج.م</span></span>
-              <span><i class="fa-solid fa-layer-group"></i> <span data-ar="4 كلاسات: 1,500" data-en="4 Classes: 1,500 EGP">4 كلاسات: 1,500</span></span>
-              <span><i class="fa-solid fa-boxes-stacked"></i> <span data-ar="8 كلاسات: 2,800" data-en="8 Classes: 2,800 EGP">8 كلاسات: 2,800</span></span>
-            </div>
-          </div>
-        </div>
-        <div class="program-card reveal">
-          <div class="program-card-img"><img src="https://picsum.photos/seed/diabetesclass/500/350" alt="Yoga for Diabetes"><span class="program-level" data-ar="متخصصة" data-en="Specialized">متخصصة</span></div>
-          <div class="program-card-body">
-            <h3>Yoga for Diabetes</h3>
-            <p style="display:flex;align-items:center;gap:6px;margin-bottom:10px;font-size:.82rem;color:var(--accent)"><i class="fa-solid fa-location-dot"></i> Royal Hills</p>
-            <p data-ar="تمارين يوجا متخصصة تساعد في تنظيم السكر والغدة الدرقية. جلسات هادئة مع تنفس موجّه." data-en="Specialized yoga exercises that help regulate blood sugar and thyroid. Calm sessions with guided breathing.">تمارين يوجا متخصصة تساعد في تنظيم السكر.</p>
-            <div style="display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--fg-muted);margin-bottom:16px"><i class="fa-regular fa-calendar"></i> <span data-ar="الاثنين والأربعاء — 7:30 مساءً" data-en="Mon & Wed — 7:30 PM">الاثنين والأربعاء — 7:30 مساءً</span></div>
-            <div class="program-meta">
-              <span><i class="fa-solid fa-ticket"></i> <span data-ar="جلسة: 400 ج.م" data-en="Session: 400 EGP">جلسة: 400 ج.م</span></span>
-              <span><i class="fa-solid fa-layer-group"></i> <span data-ar="4 كلاسات: 1,500" data-en="4 Classes: 1,500 EGP">4 كلاسات: 1,500</span></span>
-            </div>
-          </div>
-        </div>
-        <div class="program-card reveal">
-          <div class="program-card-img"><img src="https://picsum.photos/seed/gentleclass/500/350" alt="Gentle Yoga"><span class="program-level" data-ar="جميع المستويات" data-en="All Levels">جميع المستويات</span></div>
-          <div class="program-card-body">
-            <h3>Gentle Yoga</h3>
-            <p style="display:flex;align-items:center;gap:6px;margin-bottom:10px;font-size:.82rem;color:var(--accent)"><i class="fa-solid fa-location-dot"></i> Pyramids Heights</p>
-            <p data-ar="يوجا ناعمة ولطيفة مثالية للمبتدئات. تركيز على الاسترخاء والمرونة البسيطة." data-en="Soft and gentle yoga ideal for beginners. Focus on relaxation and basic flexibility.">يوجا ناعمة ولطيفة مثالية للمبتدئات.</p>
-            <div style="display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--fg-muted);margin-bottom:16px"><i class="fa-regular fa-calendar"></i> <span data-ar="الموعد سيتم تحديده قريباً" data-en="Schedule coming soon">الموعد سيتم تحديده قريباً</span></div>
-            <div class="program-meta"><span><i class="fa-solid fa-ticket"></i> <span data-ar="جلسة: 350 ج.م" data-en="Session: 350 EGP">جلسة: 350 ج.م</span></span></div>
-          </div>
+      <div class="programs-grid" id="programsGrid">
+        <div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--fg-muted)">
+          <i class="fa-solid fa-spinner fa-spin" style="font-size:1.5rem;margin-bottom:12px;display:block"></i>
+          جاري تحميل الكلاسات...
         </div>
       </div>
     </div>
@@ -537,6 +504,41 @@
       const retreats = Object.entries(data).map(([k, v]) => ({ ...v, _key: k }));
       if (retreats.length > 0) renderRetreats(retreats);
     });
+
+    // Classes — loaded from Firebase
+    onValue(ref(db, 'classes'), (snapshot) => {
+      const data = snapshot.val();
+      const grid = document.getElementById('programsGrid');
+      if (!data) {
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--fg-muted)"><i class="fa-solid fa-dumbbell" style="font-size:2rem;margin-bottom:12px;display:block;opacity:.3"></i>الكلاسات ستُعلَن قريباً!</div>';
+        return;
+      }
+      const classes = Object.entries(data).map(([k,v]) => ({...v, _key:k})).filter(c=>c.active!==false);
+      renderPrograms(classes);
+    });
+
+    function renderPrograms(list) {
+      const grid = document.getElementById('programsGrid');
+      if (!list.length) return;
+      grid.innerHTML = list.map(cls => `
+        <div class="program-card reveal">
+          <div class="program-card-img">
+            <img src="https://picsum.photos/seed/${cls._key}/500/350" alt="${cls.name}" onerror="this.src='https://picsum.photos/seed/yoga${cls._key}/500/350'">
+            ${cls.level ? `<span class="program-level">${cls.level}</span>` : ''}
+          </div>
+          <div class="program-card-body">
+            <h3>${cls.name}</h3>
+            ${cls.loc ? `<p style="display:flex;align-items:center;gap:6px;margin-bottom:10px;font-size:.82rem;color:var(--accent)"><i class="fa-solid fa-location-dot"></i>${cls.loc}</p>` : ''}
+            ${cls.schedule ? `<div style="display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--fg-muted);margin-bottom:16px"><i class="fa-regular fa-calendar"></i>${cls.schedule}</div>` : ''}
+            <div class="program-meta">
+              ${cls.price1 ? `<span><i class="fa-solid fa-ticket"></i>جلسة: ${Number(cls.price1).toLocaleString()} ج.م</span>` : ''}
+              ${cls.price4 ? `<span><i class="fa-solid fa-layer-group"></i>4 كلاسات: ${Number(cls.price4).toLocaleString()}</span>` : ''}
+              ${cls.price8 ? `<span><i class="fa-solid fa-boxes-stacked"></i>8 كلاسات: ${Number(cls.price8).toLocaleString()}</span>` : ''}
+            </div>
+          </div>
+        </div>`).join('');
+      grid.querySelectorAll('.reveal').forEach(el => rObs.observe(el));
+    }
 
     function renderRetreats(list) {
       const el   = document.getElementById('retreatsList');
