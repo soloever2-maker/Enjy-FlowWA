@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Align by Enjy — لوحة الإدارة</title>
+<link rel="manifest" href="manifest-admin.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Align Admin">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root {
+  --bg: #0F1A16; --bg2: #162019; --bg3: #1C2A22; --card: #1E2D24; --card2: #253322;
+  --border: rgba(255,255,255,0.07); --primary: #3D8C6A; --primary-light: #4EAD84;
+  --accent: #C8956C; --accent-light: #E0B892; --green: #4CAF7D; --red: #E05A5A;
+  --yellow: #F0B429; --blue: #5B8FF9; --purple: #A78BFA; --text: #EEE8DF; --text-muted: #8A9E90;
+  --text-faint: #4A6352; --shadow: 0 8px 32px rgba(0,0,0,0.4);
+  --radius: 14px; --radius-sm: 8px; --sidebar-w: 260px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;min-height:100vh}
+h1,h2,h3,h4{font-family:'Playfair Display',serif}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+input,select,textarea{font-family:inherit}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--text-faint);border-radius:10px}
+
+#loginScreen{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity .5s,visibility .5s}
+#loginScreen.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.login-box{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:40px 32px;width:100%;max-width:400px;box-shadow:0 32px 80px rgba(0,0,0,0.6);animation:loginIn .6s cubic-bezier(.4,0,.2,1) both;margin:16px}
+@keyframes loginIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.login-logo{display:flex;align-items:center;gap:10px;margin-bottom:28px}
+.login-logo i{font-size:1.8rem;color:var(--accent)}
+.login-logo span{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--text)}
+.login-box h2{font-size:1.3rem;color:var(--text);margin-bottom:4px}
+.login-box p{font-size:.85rem;color:var(--text-muted);margin-bottom:24px}
+.lf-group{margin-bottom:16px}
+.lf-group label{display:block;font-size:.82rem;color:var(--text-muted);margin-bottom:6px;font-weight:600;letter-spacing:.5px}
+.lf-group input{width:100%;padding:12px 16px;background:var(--bg3);border:1.5px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:.92rem;transition:border-color .3s;outline:none}
+.lf-group input:focus{border-color:var(--primary)}
+.btn-login{width:100%;padding:13px;background:var(--primary);color:#fff;border-radius:var(--radius-sm);font-size:.95rem;font-weight:700;margin-top:8px;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-login:hover{background:var(--primary-light)}
+.login-err{color:var(--red);font-size:.82rem;margin-top:10px;text-align:center;min-height:20px}
+
+.layout{display:flex;min-height:100vh}
+.sidebar{width:var(--sidebar-w);background:var(--bg2);border-left:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;right:0;bottom:0;z-index:200;transition:transform .35s cubic-bezier(.4,0,.2,1);transform:translateX(100%)}
+.sidebar.open{transform:translateX(0)}
+.sidebar-head{padding:24px 20px 18px;border-bottom:1px solid var(--border)}
+.sidebar-logo{display:flex;align-items:center;gap:10px}
+.sidebar-logo i{font-size:1.4rem;color:var(--accent)}
+.sidebar-logo .name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700}
+.sidebar-logo .sub{font-size:.6rem;color:var(--accent);letter-spacing:2px;text-transform:uppercase;display:block}
+.sidebar-nav{flex:1;padding:16px 12px;overflow-y:auto}
+.nav-section{margin-bottom:20px}
+.nav-section-label{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-faint);padding:0 12px;margin-bottom:8px}
+.nav-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;cursor:pointer;transition:all .25s;font-size:.9rem;font-weight:500;color:var(--text-muted);position:relative}
+.nav-item:hover{background:var(--bg3);color:var(--text)}
+.nav-item.active{background:linear-gradient(135deg,rgba(61,140,106,.25),rgba(61,140,106,.1));color:var(--primary-light)}
+.nav-item.active::before{content:'';position:absolute;right:0;top:20%;bottom:20%;width:3px;background:var(--primary-light);border-radius:3px}
+.nav-item i{width:20px;text-align:center;font-size:.9rem}
+.nav-badge{margin-right:auto;background:var(--accent);color:#fff;font-size:.65rem;padding:2px 7px;border-radius:50px;font-weight:700}
+.nav-badge.green-badge{background:var(--green)}
+.sidebar-foot{padding:16px 16px 24px;border-top:1px solid var(--border)}
+.admin-profile{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px}
+.ap-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:700;color:#fff;flex-shrink:0}
+.ap-name{font-size:.85rem;font-weight:600}
+.ap-role{font-size:.72rem;color:var(--text-muted)}
+.ap-out{margin-right:auto;color:var(--text-faint);font-size:.85rem;transition:color .2s;padding:6px}
+.ap-out:hover{color:var(--red)}
+
+#sidebarOverlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:199;opacity:0;visibility:hidden;transition:all .3s}
+#sidebarOverlay.active{opacity:1;visibility:visible}
+
+.main{margin-right:0;flex:1;display:flex;flex-direction:column;min-height:100vh;width:100%}
+.topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 16px;height:58px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100}
+.page-title{font-family:'Cairo',sans-serif;font-size:.95rem;font-weight:700;color:var(--text);flex:1;text-align:center}
+.topbar-right{display:flex;align-items:center;gap:8px}
+.topbar-btn{width:38px;height:38px;border-radius:10px;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-muted);transition:all .2s;font-size:.85rem}
+.topbar-btn:hover{border-color:var(--primary);color:var(--primary-light)}
+.mob-toggle{display:flex}
+.content{padding:16px;flex:1}
+
+.page{display:none;animation:pageIn .3s ease both}
+.page.active{display:block}
+@keyframes pageIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.stats-row{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 14px;position:relative;overflow:hidden}
+.stat-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;margin-bottom:12px}
+.stat-card h3{font-family:'Cairo',sans-serif;font-size:1.6rem;font-weight:700;color:var(--text);margin-bottom:2px}
+.stat-card p{font-size:.75rem;color:var(--text-muted)}
+
+.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px}
+.section-head h2{font-family:'Cairo',sans-serif;font-size:1rem;font-weight:700}
+.section-head p{font-size:.78rem;color:var(--text-muted);margin-top:2px}
+
+.table-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:520px}
+thead th{background:var(--card2);padding:12px 14px;font-size:.75rem;font-weight:700;color:var(--text-muted);text-align:right;letter-spacing:.5px;text-transform:uppercase;white-space:nowrap}
+tbody td{padding:12px 14px;font-size:.85rem;border-top:1px solid var(--border);vertical-align:middle}
+tbody tr:hover{background:rgba(255,255,255,.02)}
+
+.badge{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:50px;font-size:.72rem;font-weight:600}
+.badge.green{background:rgba(76,175,125,.15);color:var(--green)}
+.badge.yellow{background:rgba(240,180,41,.12);color:var(--yellow)}
+.badge.red{background:rgba(224,90,90,.12);color:var(--red)}
+.badge.blue{background:rgba(91,143,249,.12);color:var(--blue)}
+.badge.purple{background:rgba(167,139,250,.12);color:var(--purple)}
+.badge::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor}
+
+.action-btns{display:flex;align-items:center;gap:5px}
+.act-btn{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.78rem;transition:all .2s;border:1px solid var(--border);color:var(--text-muted)}
+.act-btn:hover.edit{background:rgba(91,143,249,.15);color:var(--blue);border-color:rgba(91,143,249,.3)}
+.act-btn:hover.del{background:rgba(224,90,90,.15);color:var(--red);border-color:rgba(224,90,90,.3)}
+.act-btn:hover.view{background:rgba(76,175,125,.15);color:var(--green);border-color:rgba(76,175,125,.3)}
+.act-btn:hover.wa{background:rgba(37,211,102,.15);color:#25D366;border-color:rgba(37,211,102,.3)}
+.act-btn:hover.credit{background:rgba(167,139,250,.15);color:var(--purple);border-color:rgba(167,139,250,.3)}
+
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:var(--radius-sm);font-size:.82rem;font-weight:600;transition:all .2s}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primary-light)}
+.btn-ghost{background:var(--bg3);color:var(--text-muted);border:1px solid var(--border)}
+.btn-ghost:hover{border-color:var(--primary);color:var(--primary-light)}
+.btn-danger{background:rgba(224,90,90,.15);color:var(--red);border:1px solid rgba(224,90,90,.3)}
+.btn-danger:hover{background:rgba(224,90,90,.25)}
+
+.filter-bar{display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.search-box{position:relative;flex:1;min-width:160px}
+.search-box i{position:absolute;top:50%;transform:translateY(-50%);right:10px;color:var(--text-faint);font-size:.82rem}
+.search-box input{width:100%;padding:8px 32px 8px 12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:.85rem;outline:none}
+.search-box input:focus{border-color:var(--primary)}
+.filter-bar select{padding:8px 12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:.82rem;outline:none;cursor:pointer;max-width:140px}
+
+.classes-grid{display:grid;grid-template-columns:1fr;gap:14px}
+.class-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px}
+.cc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
+.cc-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.cc-name{font-size:1rem;font-weight:700;margin-bottom:4px}
+.cc-loc{font-size:.75rem;color:var(--text-muted);display:flex;align-items:center;gap:5px;margin-bottom:10px}
+.cc-row{display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+.cc-stat{text-align:center}
+.cc-stat .val{font-size:1rem;font-weight:700;color:var(--text)}
+.cc-stat .lbl{font-size:.68rem;color:var(--text-muted)}
+.progress-bar{height:5px;background:var(--bg3);border-radius:5px;margin-top:8px;overflow:hidden}
+.progress-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--primary),var(--primary-light))}
+
+.dash-grid{display:flex;flex-direction:column;gap:16px;margin-bottom:20px}
+.chart-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px}
+.chart-card h3{font-family:'Cairo',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:16px}
+.metric-list{display:flex;flex-direction:column;gap:8px}
+.metric-item{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--bg3);border-radius:var(--radius-sm)}
+.metric-item .m-label{font-size:.82rem;color:var(--text-muted);display:flex;align-items:center;gap:8px}
+.metric-item .m-label i{color:var(--accent);width:14px;text-align:center}
+.metric-item .m-val{font-size:.88rem;font-weight:700}
+
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:.78rem;color:var(--text-muted);margin-bottom:5px;font-weight:600}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:10px 13px;background:var(--bg3);border:1.5px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:.87rem;transition:border-color .3s;outline:none}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--primary)}
+.form-group textarea{resize:vertical;min-height:70px}
+.form-group input[type="date"]{color-scheme:dark}
+.form-row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form-hint{font-size:.72rem;color:var(--text-faint);margin-top:4px}
+
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:500;opacity:0;visibility:hidden;transition:all .3s;backdrop-filter:blur(4px);display:flex;align-items:flex-end;justify-content:center;padding:0}
+.modal-overlay.open{opacity:1;visibility:visible}
+.modal{background:var(--card);border:1px solid var(--border);border-radius:20px 20px 0 0;padding:24px 20px;width:100%;max-width:100%;box-shadow:0 -20px 60px rgba(0,0,0,.5);transform:translateY(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);max-height:90vh;overflow-y:auto}
+.modal-overlay.open .modal{transform:translateY(0)}
+.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.modal-head h2{font-family:'Cairo',sans-serif;font-size:1rem;font-weight:700}
+.modal-close{width:32px;height:32px;border-radius:8px;background:var(--bg3);display:flex;align-items:center;justify-content:center;color:var(--text-muted)}
+.modal-foot{display:flex;gap:8px;justify-content:flex-end;margin-top:20px}
+
+.toast-container{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none;width:90%;max-width:320px}
+.toast{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:.85rem;display:flex;align-items:center;gap:10px;box-shadow:var(--shadow);animation:tin .3s ease,tout .3s 2.7s ease forwards;pointer-events:all}
+.toast i{font-size:1rem}
+.toast.success{border-color:rgba(76,175,125,.3)}.toast.success i{color:var(--green)}
+.toast.error{border-color:rgba(224,90,90,.3)}.toast.error i{color:var(--red)}
+@keyframes tin{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes tout{from{opacity:1}to{opacity:0}}
+
+.loading-row td{text-align:center;padding:40px;color:var(--text-muted)}
+.spinner{display:inline-block;width:24px;height:24px;border:2px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:8px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.empty-state{text-align:center;padding:40px 20px;color:var(--text-muted)}
+.empty-state i{font-size:2.5rem;margin-bottom:12px;opacity:.3;display:block}
+
+.credits-box{background:var(--bg3);border-radius:var(--radius-sm);padding:14px;border:1px solid var(--border);margin-bottom:12px}
+.credits-box .cb-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.credits-box .cb-num{font-size:1.8rem;font-weight:800;color:var(--primary-light);line-height:1}
+.credits-box .cb-lbl{font-size:.72rem;color:var(--text-muted);margin-top:2px}
+.attend-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:var(--radius-sm);font-size:.78rem;font-weight:700;background:rgba(76,175,125,.15);color:var(--green);border:1px solid rgba(76,175,125,.3);cursor:pointer;transition:all .2s}
+.attend-btn:hover{background:rgba(76,175,125,.25)}
+
+.pay-paid{color:var(--green);font-size:.72rem;font-weight:700;display:inline-flex;align-items:center;gap:4px}
+.pay-pending{color:var(--yellow);font-size:.72rem;font-weight:700;display:inline-flex;align-items:center;gap:4px}
+
+.instapay-info{background:rgba(91,143,249,.08);border:1px solid rgba(91,143,249,.2);border-radius:var(--radius-sm);padding:12px 14px;font-size:.82rem;color:var(--text-muted);margin-top:8px;display:flex;align-items:flex-start;gap:10px}
+.instapay-info i{color:var(--blue);margin-top:2px;flex-shrink:0}
+
+.checkin-links-box{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;margin-bottom:16px}
+.checkin-links-box h4{font-family:'Cairo',sans-serif;font-size:.82rem;font-weight:700;color:var(--text-muted);margin-bottom:10px}
+.checkin-link-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)}
+.checkin-link-row:last-child{border-bottom:none}
+.cl-name{font-size:.82rem;font-weight:600;display:flex;align-items:center;gap:8px}
+.cl-actions{display:flex;gap:6px}
+
+@media(min-width:900px){
+  .sidebar{transform:translateX(0)}
+  .main{margin-right:var(--sidebar-w)}
+  .content{padding:28px}
+  .stats-row{grid-template-columns:repeat(4,1fr);gap:16px}
+  .classes-grid{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+  .dash-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:20px}
+  .modal-overlay{align-items:center;padding:24px}
+  .modal{border-radius:20px;max-width:540px;max-height:85vh}
+  .toast-container{left:24px;transform:none;width:auto;max-width:300px}
+  .mob-toggle{display:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo"><i class="fa-solid fa-spa"></i><span>Align by Enjy</span></div>
+    <h2>لوحة الإدارة</h2>
+    <p>تسجيل الدخول للمتابعة</p>
+    <div class="lf-group"><label>البريد الإلكتروني</label><input type="email" id="loginUser" placeholder="email@example.com" autocomplete="email" dir="ltr"></div>
+    <div class="lf-group"><label>كلمة المرور</label><input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password"></div>
+    <button class="btn-login" onclick="doLogin()"><i class="fa-solid fa-right-to-bracket"></i> دخول</button>
+    <div class="login-err" id="loginErr"></div>
+  </div>
+</div>
+
+<div id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+<div class="layout" id="appLayout" style="display:none">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-head">
+      <div class="sidebar-logo"><i class="fa-solid fa-spa"></i><div><span class="name">Align by Enjy</span><span class="sub">Admin Dashboard</span></div></div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-section-label">الرئيسية</div>
+        <div class="nav-item active" onclick="goPage('dashboard',this)"><i class="fa-solid fa-chart-pie"></i> نظرة عامة</div>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">إدارة</div>
+        <div class="nav-item" onclick="goPage('bookings',this)"><i class="fa-solid fa-calendar-check"></i> الحجوزات<span class="nav-badge" id="newBadge">0</span></div>
+        <div class="nav-item" onclick="goPage('classes',this)"><i class="fa-solid fa-dumbbell"></i> الكلاسات والأسعار</div>
+        <div class="nav-item" onclick="goPage('retreats',this)"><i class="fa-solid fa-mountain-sun"></i> الريتريتس</div>
+        <div class="nav-item" onclick="goPage('students',this)"><i class="fa-solid fa-users"></i> المتدربات والرصيد</div>
+        <div class="nav-item" onclick="goPage('attendance',this)"><i class="fa-solid fa-user-check"></i> سجل الحضور<span class="nav-badge green-badge" id="todayBadge">0</span></div>
+        <div class="nav-item" onclick="goPage('locations',this)"><i class="fa-solid fa-location-dot"></i> مواقع الكلاسات</div>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">تقارير</div>
+        <div class="nav-item" onclick="goPage('stats',this)"><i class="fa-solid fa-chart-line"></i> الإحصائيات</div>
+      </div>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="admin-profile">
+        <div class="ap-av">إ</div>
+        <div><div class="ap-name">إنجي عبد المنعم</div><div class="ap-role">مديرة الموقع</div></div>
+        <button class="ap-out" title="خروج" onclick="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+      </div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <button class="topbar-btn mob-toggle" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
+      <span class="page-title" id="pageTitle">نظرة عامة</span>
+      <div class="topbar-right">
+        <button class="topbar-btn" id="syncBtn" title="مزامنة"><i class="fa-solid fa-rotate-right"></i></button>
+        <a href="index.html" target="_blank" class="topbar-btn" title="فتح الموقع"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- DASHBOARD -->
+      <div class="page active" id="page-dashboard">
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-icon" style="background:rgba(61,140,106,.15);color:var(--green)"><i class="fa-solid fa-users"></i></div>
+            <h3 id="sc1">—</h3><p>متدربة فريدة</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background:rgba(200,149,108,.15);color:var(--accent)"><i class="fa-solid fa-calendar-check"></i></div>
+            <h3 id="sc2">—</h3><p>إجمالي الحجوزات</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background:rgba(91,143,249,.15);color:var(--blue)"><i class="fa-solid fa-clock-rotate-left"></i></div>
+            <h3 id="sc3">—</h3><p>حجوزات جديدة</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background:rgba(240,180,41,.12);color:var(--yellow)"><i class="fa-solid fa-star"></i></div>
+            <h3>4.9</h3><p>متوسط التقييم</p>
+          </div>
+        </div>
+
+        <div class="dash-grid">
+          <div>
+            <div class="section-head">
+              <div><h2>آخر الحجوزات</h2><p>الحجوزات الواردة من الموقع</p></div>
+              <button class="btn btn-ghost" onclick="goPage('bookings',null)"><i class="fa-solid fa-arrow-left"></i> الكل</button>
+            </div>
+            <div class="table-wrap">
+              <table><thead><tr><th>الاسم</th><th>الكلاس</th><th>تاريخ الجلسة</th><th>الدفع</th><th>الحالة</th><th></th></tr></thead>
+              <tbody id="dashBookings"><tr><td colspan="6" style="text-align:center;padding:24px;color:var(--text-muted)"><div class="spinner"></div></td></tr></tbody></table>
+            </div>
+          </div>
+          <div>
+            <div class="section-head"><div><h2>توزيع الكلاسات</h2></div></div>
+            <div class="chart-card"><div class="metric-list" id="classDistMetrics"></div></div>
+          </div>
+        </div>
+
+        <div class="section-head"><div><h2>إجراءات سريعة</h2></div></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-primary" onclick="openModal('addBooking')"><i class="fa-solid fa-plus"></i> إضافة حجز</button>
+          <button class="btn btn-ghost" onclick="goPage('classes',null)"><i class="fa-solid fa-dumbbell"></i> الكلاسات</button>
+          <button class="btn btn-ghost" onclick="exportCSV()"><i class="fa-solid fa-file-export"></i> تصدير</button>
+          <button class="btn btn-ghost" onclick="goPage('attendance',null)"><i class="fa-solid fa-user-check"></i> سجل الحضور</button>
+        </div>
+      </div>
+
+      <!-- BOOKINGS -->
+      <div class="page" id="page-bookings">
+        <div class="filter-bar">
+          <div class="search-box"><i class="fa-solid fa-search"></i><input type="text" placeholder="بحث..." oninput="filterBookings()" id="bookSearch"></div>
+          <select onchange="filterBookings()" id="bookFilter">
+            <option value="">كل الكلاسات</option>
+            <option value="power">Power Yoga</option>
+            <option value="diabetes">Yoga for Diabetes</option>
+            <option value="gentle">Gentle Yoga</option>
+            <option value="retreats">الريتريتس</option>
+          </select>
+          <select onchange="filterBookings()" id="statusFilter">
+            <option value="">كل الحالات</option>
+            <option value="new">جديد</option>
+            <option value="confirmed">مؤكد</option>
+            <option value="done">مكتمل</option>
+            <option value="cancelled">ملغي</option>
+          </select>
+          <select onchange="filterBookings()" id="payFilter">
+            <option value="">كل المدفوعات</option>
+            <option value="paid">مدفوع</option>
+            <option value="pending">معلق</option>
+          </select>
+          <button class="btn btn-primary" onclick="openModal('addBooking')"><i class="fa-solid fa-plus"></i></button>
+          <button class="btn btn-ghost" onclick="exportCSV()"><i class="fa-solid fa-file-export"></i></button>
+        </div>
+        <div class="table-wrap">
+          <table><thead><tr><th>#</th><th>الاسم</th><th>الجوال</th><th>الكلاس</th><th>تاريخ الجلسة</th><th>الدفع</th><th>الحالة</th><th></th></tr></thead>
+          <tbody id="bookingsTable"><tr class="loading-row"><td colspan="8"><div class="spinner"></div><br>جاري التحميل...</td></tr></tbody></table>
+        </div>
+        <div id="bookEmpty" class="empty-state" style="display:none"><i class="fa-solid fa-calendar-xmark"></i><p>لا توجد حجوزات</p></div>
+      </div>
+
+      <!-- CLASSES -->
+      <div class="page" id="page-classes">
+        <div class="section-head">
+          <div><h2>إدارة الكلاسات والأسعار</h2></div>
+          <button class="btn btn-primary" onclick="openModal('addClass')"><i class="fa-solid fa-plus"></i> جديد</button>
+        </div>
+        <div class="classes-grid" id="classesGrid"></div>
+      </div>
+
+      <!-- RETREATS -->
+      <div class="page" id="page-retreats">
+        <div class="section-head">
+          <div><h2>إدارة الريتريتس</h2><p>رحلات اليوجا والتأمل</p></div>
+          <button class="btn btn-primary" onclick="openModal('addRetreat')"><i class="fa-solid fa-plus"></i> إضافة ريتريت</button>
+        </div>
+        <div class="classes-grid" id="retreatsGrid"></div>
+      </div>
+
+      <!-- STUDENTS -->
+      <div class="page" id="page-students">
+        <div class="filter-bar">
+          <div class="search-box"><i class="fa-solid fa-search"></i><input type="text" placeholder="بحث..." oninput="filterStudents(this.value)"></div>
+          <button class="btn btn-ghost" onclick="exportCSV()"><i class="fa-solid fa-file-export"></i> تصدير</button>
+        </div>
+        <div class="table-wrap">
+          <table><thead><tr><th>#</th><th>الاسم</th><th>الجوال</th><th>الكلاسات</th><th>الرصيد المتبقي</th><th>انتهاء الصلاحية</th><th>عدد الحضور</th><th></th></tr></thead>
+          <tbody id="studentsTable"></tbody></table>
+        </div>
+      </div>
+
+      <!-- ATTENDANCE -->
+      <div class="page" id="page-attendance">
+        <div class="section-head" style="flex-wrap:wrap;gap:12px">
+          <div>
+            <h2>سجل الحضور اليومي</h2>
+            <p id="attendDateLabel" style="font-size:.78rem;color:var(--text-muted)"></p>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <input type="date" id="attendDatePicker" onchange="loadAttendance(this.value)"
+              style="padding:7px 12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-family:inherit;font-size:.82rem;outline:none;color-scheme:dark">
+          </div>
+        </div>
+
+        <div class="checkin-links-box">
+          <h4><i class="fa-solid fa-link" style="color:var(--accent);margin-left:6px"></i>روابط Check-in — أرسليها للمتدربات</h4>
+          <div class="checkin-link-row">
+            <span class="cl-name"><i class="fa-solid fa-fire" style="color:var(--green)"></i> Power Yoga</span>
+            <div class="cl-actions">
+              <button class="btn btn-ghost" style="font-size:.72rem;padding:5px 10px" onclick="copyCheckinLink('power')"><i class="fa-solid fa-copy"></i> نسخ</button>
+              <a href="checkin.html?class=power" target="_blank" class="btn btn-ghost" style="font-size:.72rem;padding:5px 10px"><i class="fa-solid fa-arrow-up-right-from-square"></i> فتح</a>
+              <button class="btn btn-ghost" style="font-size:.72rem;padding:5px 10px" onclick="shareCheckinWA('power','Power Yoga')"><i class="fa-brands fa-whatsapp"></i> واتساب</button>
+            </div>
+          </div>
+          <div class="checkin-link-row">
+            <span class="cl-name"><i class="fa-solid fa-heart-pulse" style="color:var(--accent)"></i> Yoga for Diabetes</span>
+            <div class="cl-actions">
+              <button class="btn btn-ghost" style="font-size:.72rem;padding:5px 10px" onclick="copyCheckinLink('diabetes')"><i class="fa-solid fa-copy"></i> نسخ</button>
+              <a href="checkin.html?class=diabetes" target="_blank" class="btn btn-ghost" style="font-size:.72rem;padding:5px 10px"><i class="fa-solid fa-arrow-up-right-from-square"></i> فتح</a>
+              <button class="btn btn-ghost" style="font-size:.72rem;padding:5px 10px" onclick="shareCheckinWA('diabetes','Yoga for Diabetes')"><i class="fa-brands fa-whatsapp"></i> واتساب</button>
+            </div>
+          </div>
+          <div class="checkin-link-row">
+            <span class="cl-name"><i class="fa-solid fa-leaf" style="color:var(--blue)"></i> Gentle Yoga</span>
+            <div class="cl-actions">
+              <button class="btn btn-ghost" style="font-size:.72rem;padding:5px 10px" onclick="copyCheckinLink('gentle')"><i class="fa-solid fa-copy"></i> نسخ</button>
+              <a href="checkin.html?class=gentle" target="_blank" class="btn btn-ghost" style="font-size:.72rem;padding:5px 10px"><i class="fa-solid fa-arrow-up-right-from-square"></i> فتح</a>
+              <button class="btn btn-ghost" style="font-size:.72rem;padding:5px 10px" onclick="shareCheckinWA('gentle','Gentle Yoga')"><i class="fa-brands fa-whatsapp"></i> واتساب</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats-row" style="margin-bottom:20px">
+          <div class="stat-card"><div class="stat-icon" style="background:rgba(76,175,125,.15);color:var(--green)"><i class="fa-solid fa-user-check"></i></div><h3 id="att1">0</h3><p>حضروا</p></div>
+          <div class="stat-card"><div class="stat-icon" style="background:rgba(61,140,106,.15);color:var(--primary-light)"><i class="fa-solid fa-fire"></i></div><h3 id="att2">0</h3><p>Power Yoga</p></div>
+          <div class="stat-card"><div class="stat-icon" style="background:rgba(200,149,108,.15);color:var(--accent)"><i class="fa-solid fa-heart-pulse"></i></div><h3 id="att3">0</h3><p>Yoga for Diabetes</p></div>
+          <div class="stat-card"><div class="stat-icon" style="background:rgba(91,143,249,.15);color:var(--blue)"><i class="fa-solid fa-leaf"></i></div><h3 id="att4">0</h3><p>Gentle Yoga</p></div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>#</th><th>الاسم</th><th>الجوال</th><th>الكلاس</th><th>وقت التسجيل</th><th>الرصيد المتبقي</th><th></th></tr></thead>
+            <tbody id="attendanceTable"><tr class="loading-row"><td colspan="7">اختاري يوم لعرض الحضور</td></tr></tbody>
+          </table>
+        </div>
+        <div id="attendEmpty" class="empty-state" style="display:none">
+          <i class="fa-solid fa-user-clock"></i><p>لا يوجد حضور مسجل لهذا اليوم</p>
+        </div>
+      </div>
+
+      <!-- LOCATIONS -->
+      <div class="page" id="page-locations">
+        <div class="section-head">
+          <div><h2>مواقع الكلاسات</h2><p style="font-size:.78rem;color:var(--text-muted)">تحديد النطاق الجغرافي لكل كلاس</p></div>
+        </div>
+        <div class="instapay-info" style="margin-bottom:20px">
+          <i class="fa-solid fa-circle-info"></i>
+          <div>
+            <strong style="color:var(--text);display:block;margin-bottom:4px">كيف تحصلي على الإحداثيات من Google Maps؟</strong>
+            افتحي Google Maps ← اذهبي للموقع ← اضغطي كليك يمين ← انسخي الأرقام.
+            مثال: <span dir="ltr" style="font-family:monospace;color:var(--blue)">29.9719, 30.9424</span>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div class="chart-card">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+              <div style="width:36px;height:36px;background:rgba(76,175,125,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--green)"><i class="fa-solid fa-fire"></i></div>
+              <div><div style="font-weight:700">Power Yoga</div><div style="font-size:.72rem;color:var(--text-muted)">Royal Hills Clubhouse</div></div>
+              <span class="badge yellow" id="locStatus-power" style="margin-right:auto">لم يُحدَّد بعد</span>
+            </div>
+            <div class="form-row2">
+              <div class="form-group"><label>خط العرض Latitude</label><input type="number" id="lat-power" step="0.0001" placeholder="29.9719" dir="ltr"></div>
+              <div class="form-group"><label>خط الطول Longitude</label><input type="number" id="lng-power" step="0.0001" placeholder="30.9424" dir="ltr"></div>
+            </div>
+            <div class="form-group"><label>نطاق التحقق بالمتر (افتراضي: 400)</label><input type="number" id="radius-power" placeholder="400" dir="ltr"></div>
+            <button class="btn btn-primary" onclick="saveLocation('power')"><i class="fa-solid fa-floppy-disk"></i> حفظ موقع Power Yoga</button>
+            <div id="locHint-power" class="form-hint" style="margin-top:8px"></div>
+          </div>
+          <div class="chart-card">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+              <div style="width:36px;height:36px;background:rgba(200,149,108,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--accent)"><i class="fa-solid fa-heart-pulse"></i></div>
+              <div><div style="font-weight:700">Yoga for Diabetes</div><div style="font-size:.72rem;color:var(--text-muted)">Royal Hills</div></div>
+              <span class="badge yellow" id="locStatus-diabetes" style="margin-right:auto">لم يُحدَّد بعد</span>
+            </div>
+            <div class="form-row2">
+              <div class="form-group"><label>خط العرض Latitude</label><input type="number" id="lat-diabetes" step="0.0001" placeholder="29.9719" dir="ltr"></div>
+              <div class="form-group"><label>خط الطول Longitude</label><input type="number" id="lng-diabetes" step="0.0001" placeholder="30.9424" dir="ltr"></div>
+            </div>
+            <div class="form-group"><label>نطاق التحقق بالمتر</label><input type="number" id="radius-diabetes" placeholder="400" dir="ltr"></div>
+            <button class="btn btn-primary" onclick="saveLocation('diabetes')"><i class="fa-solid fa-floppy-disk"></i> حفظ موقع Yoga for Diabetes</button>
+            <div id="locHint-diabetes" class="form-hint" style="margin-top:8px"></div>
+          </div>
+          <div class="chart-card">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+              <div style="width:36px;height:36px;background:rgba(91,143,249,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--blue)"><i class="fa-solid fa-leaf"></i></div>
+              <div><div style="font-weight:700">Gentle Yoga</div><div style="font-size:.72rem;color:var(--text-muted)">Pyramids Heights</div></div>
+              <span class="badge yellow" id="locStatus-gentle" style="margin-right:auto">لم يُحدَّد بعد</span>
+            </div>
+            <div class="form-row2">
+              <div class="form-group"><label>خط العرض Latitude</label><input type="number" id="lat-gentle" step="0.0001" placeholder="29.8636" dir="ltr"></div>
+              <div class="form-group"><label>خط الطول Longitude</label><input type="number" id="lng-gentle" step="0.0001" placeholder="31.0117" dir="ltr"></div>
+            </div>
+            <div class="form-group"><label>نطاق التحقق بالمتر</label><input type="number" id="radius-gentle" placeholder="400" dir="ltr"></div>
+            <button class="btn btn-primary" onclick="saveLocation('gentle')"><i class="fa-solid fa-floppy-disk"></i> حفظ موقع Gentle Yoga</button>
+            <div id="locHint-gentle" class="form-hint" style="margin-top:8px"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATS -->
+      <div class="page" id="page-stats">
+        <div class="stats-row" style="margin-bottom:20px">
+          <div class="stat-card"><div class="stat-icon" style="background:rgba(61,140,106,.15);color:var(--green)"><i class="fa-solid fa-users"></i></div><h3 id="st1">—</h3><p>إجمالي المتدربات</p></div>
+          <div class="stat-card"><div class="stat-icon" style="background:rgba(200,149,108,.15);color:var(--accent)"><i class="fa-solid fa-calendar-check"></i></div><h3 id="st2">—</h3><p>إجمالي الحجوزات</p></div>
+          <div class="stat-card"><div class="stat-icon" style="background:rgba(91,143,249,.15);color:var(--blue)"><i class="fa-solid fa-clock-rotate-left"></i></div><h3 id="st3">—</h3><p>حجوزات جديدة</p></div>
+          <div class="stat-card"><div class="stat-icon" style="background:rgba(76,175,125,.15);color:var(--green)"><i class="fa-solid fa-circle-check"></i></div><h3 id="st4">—</h3><p>حجوزات مؤكدة</p></div>
+        </div>
+        <div class="chart-card">
+          <h3 style="margin-bottom:14px">توزيع الكلاسات</h3>
+          <div class="metric-list" id="statsDistList"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <div class="modal-head"><h2 id="modalTitle">عنوان</h2><button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button></div>
+    <div id="modalBody"></div>
+    <div class="modal-foot" id="modalFoot"></div>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- admin-script أولاً قبل Firebase -->
+<script src="admin-script.js"></script>
+
+<!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getDatabase, ref, push, onValue, update, remove, serverTimestamp, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+  import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyB7xZSiGqTh4ncnHcvFBx8ufwPudpEEl50",
+    authDomain: "align-by-enjy.firebaseapp.com",
+    databaseURL: "https://align-by-enjy-default-rtdb.firebaseio.com",
+    projectId: "align-by-enjy",
+    storageBucket: "align-by-enjy.firebasestorage.app",
+    messagingSenderId: "355777857468",
+    appId: "1:355777857468:web:20b15a19f526db02578db9"
+  };
+
+  const app  = initializeApp(firebaseConfig);
+  const db   = getDatabase(app);
+  const auth = getAuth(app);
+
+  function safeCall(fnName, ...args) {
+    if (typeof window[fnName] === 'function') {
+      window[fnName](...args);
+    } else {
+      const interval = setInterval(() => {
+        if (typeof window[fnName] === 'function') {
+          clearInterval(interval);
+          window[fnName](...args);
+        }
+      }, 50);
+      setTimeout(() => clearInterval(interval), 5000);
+    }
+  }
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      document.getElementById('loginScreen').classList.add('hidden');
+      document.getElementById('appLayout').style.display = 'flex';
+      safeCall('renderClasses');
+    } else {
+      document.getElementById('loginScreen').classList.remove('hidden');
+      document.getElementById('appLayout').style.display = 'none';
+    }
+  });
+
+  window.fbSignIn  = async (email, password) => { await signInWithEmailAndPassword(auth, email, password); };
+  window.fbSignOut = async () => { await signOut(auth); };
+
+  // Bookings
+  onValue(ref(db, 'bookings'), (snapshot) => {
+    const data = snapshot.val();
+    window.bookings = [];
+    if (data) {
+      Object.entries(data).forEach(([key, val]) => { window.bookings.push({ ...val, _key: key }); });
+      window.bookings.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+    }
+    safeCall('onBookingsLoaded');
+  });
+
+  // Credits
+  onValue(ref(db, 'credits'), (snapshot) => {
+    window.creditsData = snapshot.val() || {};
+    safeCall('onCreditsLoaded');
+  });
+
+  // Retreats
+  onValue(ref(db, 'retreats'), (snapshot) => {
+    window.retreatsData = [];
+    const data = snapshot.val();
+    if (data) { Object.entries(data).forEach(([key, val]) => { window.retreatsData.push({ ...val, _key: key }); }); }
+    if (document.querySelector('#page-retreats.active')) safeCall('renderRetreats');
+  });
+
+  // Attendance
+  onValue(ref(db, 'attendance'), (snapshot) => {
+    window.attendanceData = snapshot.val() || {};
+    const today   = new Date().toISOString().slice(0, 10);
+    const todayData = window.attendanceData[today] || {};
+    const count   = Object.keys(todayData).length;
+    const badge   = document.getElementById('todayBadge');
+    if (badge) badge.textContent = count;
+    if (document.querySelector('#page-attendance.active')) {
+      const dp = document.getElementById('attendDatePicker');
+      safeCall('loadAttendance', dp?.value || today);
+    }
+  });
+
+  // Locations
+  onValue(ref(db, 'classLocations'), (snapshot) => {
+    window.savedLocations = snapshot.val() || {};
+    if (document.querySelector('#page-locations.active')) safeCall('renderSavedLocations');
+  });
+
+  window.fbAddBooking    = async (data) => { await push(ref(db, 'bookings'), { ...data, createdAt: serverTimestamp() }); };
+  window.fbUpdateStatus  = async (key, status) => { await update(ref(db, `bookings/${key}`), { status }); };
+  window.fbUpdatePayment = async (key, paymentStatus, paymentRef) => { await update(ref(db, `bookings/${key}`), { paymentStatus, paymentRef: paymentRef || '' }); };
+  window.fbDeleteBooking = async (key) => { await remove(ref(db, `bookings/${key}`)); };
+
+  window.fbSetCredits = async (phone, credits, expiry) => {
+    const rawPhone = phone.replace(/[^0-9]/g,'');
+    const key = rawPhone.length >= 10 ? rawPhone.slice(-10) : rawPhone;
+    await update(ref(db, `credits/${key}`), { credits: Number(credits), expiry, lastUpdate: new Date().toISOString(), phone });
+  };
+
+  window.fbAddRetreat    = async (data) => { await push(ref(db, 'retreats'), { ...data, createdAt: serverTimestamp() }); };
+  window.fbUpdateRetreat = async (key, data) => { await update(ref(db, `retreats/${key}`), data); };
+  window.fbDeleteRetreat = async (key) => { await remove(ref(db, `retreats/${key}`)); };
+  window.fbSaveLocation  = async (classId, lat, lng, radius) => {
+    await update(ref(db, `classLocations/${classId}`), { lat, lng, radius, updatedAt: new Date().toISOString().slice(0,10) });
+  };
+
+  document.getElementById('syncBtn').addEventListener('click', () => {
+    safeCall('showToast', 'البيانات محدّثة في الوقت الفعلي ✓', 'success', 'fa-check-circle');
+  });
+</script>
+</body>
+</html>
