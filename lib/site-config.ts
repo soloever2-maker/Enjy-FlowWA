@@ -98,3 +98,127 @@ export const DEFAULT_CLASS_META = {
   ar: 'اكتشفي التفاصيل والمواعيد داخل التطبيق',
   en: 'Discover details and schedule inside the app',
 }
+
+// Per-class duration + level badges (keyed by class name)
+export const CLASS_DETAILS: Record<
+  string,
+  { duration: string; level: { ar: string; en: string } }
+> = {
+  'Power Yoga': {
+    duration: '60',
+    level: { ar: 'جميع المستويات', en: 'All Levels' },
+  },
+  'Mat Pilates': {
+    duration: '55',
+    level: { ar: 'جميع المستويات', en: 'All Levels' },
+  },
+  'Gentle Yoga & Recovery': {
+    duration: '60',
+    level: { ar: 'مبتدئات', en: 'Beginner-Friendly' },
+  },
+  'Belly Rhythmic Dancing': {
+    duration: '50',
+    level: { ar: 'جميع المستويات', en: 'All Levels' },
+  },
+  'Aqua Aerobics': {
+    duration: '45',
+    level: { ar: 'جميع المستويات', en: 'All Levels' },
+  },
+}
+
+export const DEFAULT_CLASS_DETAILS = {
+  duration: '60',
+  level: { ar: 'جميع المستويات', en: 'All Levels' },
+}
+
+// Weekly schedule preview — condensed version for the website
+export const SCHEDULE_PREVIEW = [
+  {
+    day: { ar: 'الأحد', en: 'Sunday' },
+    classes: [
+      { time: '9:00 AM', name: 'Power Yoga' },
+      { time: '6:00 PM', name: 'Mat Pilates' },
+    ],
+  },
+  {
+    day: { ar: 'الإثنين', en: 'Monday' },
+    classes: [
+      { time: '9:00 AM', name: 'Gentle Yoga & Recovery' },
+      { time: '6:00 PM', name: 'Belly Rhythmic Dancing' },
+    ],
+  },
+  {
+    day: { ar: 'الثلاثاء', en: 'Tuesday' },
+    classes: [
+      { time: '9:00 AM', name: 'Power Yoga' },
+      { time: '6:00 PM', name: 'Aqua Aerobics' },
+    ],
+  },
+  {
+    day: { ar: 'الأربعاء', en: 'Wednesday' },
+    classes: [
+      { time: '9:00 AM', name: 'Mat Pilates' },
+      { time: '6:00 PM', name: 'Gentle Yoga & Recovery' },
+    ],
+  },
+  {
+    day: { ar: 'الخميس', en: 'Thursday' },
+    classes: [
+      { time: '9:00 AM', name: 'Power Yoga' },
+      { time: '6:00 PM', name: 'Belly Rhythmic Dancing' },
+    ],
+  },
+  {
+    day: { ar: 'السبت', en: 'Saturday' },
+    classes: [
+      { time: '9:00 AM', name: 'Aqua Aerobics' },
+      { time: '11:00 AM', name: 'Gentle Yoga & Recovery' },
+    ],
+  },
+]
+
+// FAQ items
+export const FAQ_ITEMS = [
+  {
+    q: { ar: 'هل لازم أجيب معايا مات؟', en: 'Do I need to bring my own mat?' },
+    a: {
+      ar: 'لأ — عندنا كل الأدوات في الاستوديو. بس لو عندك مات بتحبيها، أهلاً بيها!',
+      en: 'No — we provide all the equipment at the studio. But if you have a mat you love, you're welcome to bring it!',
+    },
+  },
+  {
+    q: { ar: 'الكلاسات مناسبة للمبتدئات؟', en: 'Are classes suitable for beginners?' },
+    a: {
+      ar: 'أكيد! كل كلاساتنا فيها تعديلات للمبتدئات والمتقدمات. إنجي بتراعي كل المستويات.',
+      en: 'Absolutely! All our classes include modifications for beginners and advanced members. Enjy accommodates every level.',
+    },
+  },
+  {
+    q: { ar: 'إيه سياسة الإلغاء؟', en: 'What's the cancellation policy?' },
+    a: {
+      ar: 'تقدري تلغي الحجز مجانًا قبل الكلاس بـ 12 ساعة — الحصة بترجع لباقتك تلقائيًا.',
+      en: 'You can cancel for free up to 12 hours before class — the session goes back to your package automatically.',
+    },
+  },
+  {
+    q: { ar: 'هل المكان مختلط؟', en: 'Is the studio co-ed?' },
+    a: {
+      ar: 'لأ — Align مساحة للسيدات فقط. بيئة آمنة ومريحة 100%.',
+      en: 'No — Align is a ladies-only space. A 100% safe and comfortable environment.',
+    },
+  },
+  {
+    q: { ar: 'إزاي أحجز كلاس؟', en: 'How do I book a class?' },
+    a: {
+      ar: 'كل الحجز من تطبيق Align — اختاري الكلاس، اختاري الموعد، واحجزي في ثانية.',
+      en: 'All booking is through the Align app — pick your class, choose a time, and book in seconds.',
+    },
+  },
+  {
+    q: { ar: 'إيه نظام الباقات؟', en: 'How do packages work?' },
+    a: {
+      ar: 'بتشتري باقة بعدد حصص معين (4 أو 8 أو 12) وبتستخدميها في أي كلاس في المواعيد المتاحة.',
+      en: 'You purchase a package with a set number of sessions (4, 8, or 12) and use them for any class at available times.',
+    },
+  },
+]

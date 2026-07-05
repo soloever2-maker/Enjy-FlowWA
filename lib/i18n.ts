@@ -38,6 +38,47 @@ export const DICT = {
   },
   'classes.book': { ar: 'احجزي من التطبيق', en: 'Book in the app' },
 
+  // ---- First Class
+  'first.label': { ar: 'أول كلاس ليكِ', en: 'Your First Class' },
+  'first.title': { ar: 'ابدئي في ٣ خطوات بس', en: 'Start in just 3 steps' },
+  'first.sub': {
+    ar: 'من أول ما تحمّلي التطبيق لحد ما تقفي على المات — كل حاجة سهلة وبسيطة',
+    en: 'From downloading the app to stepping on the mat — everything is easy and simple',
+  },
+  'first.step1.title': { ar: 'حمّلي التطبيق', en: 'Download the app' },
+  'first.step1.desc': {
+    ar: 'سجّلي حسابك في ثوانٍ واستكشفي الكلاسات والمواعيد المتاحة',
+    en: 'Create your account in seconds and explore available classes and times',
+  },
+  'first.step2.title': { ar: 'اختاري باقتك', en: 'Choose your package' },
+  'first.step2.desc': {
+    ar: 'اختاري الباقة اللي تناسبك — من 4 لـ 12 حصة — وابدئي الحجز فورًا',
+    en: 'Pick the package that fits you — from 4 to 12 sessions — and start booking right away',
+  },
+  'first.step3.title': { ar: 'احضري أول كلاس', en: 'Attend your first class' },
+  'first.step3.desc': {
+    ar: 'تعالي قبلها بـ 10 دقايق، وسيبي الباقي على إنجي — هتحسي إنك في بيتك',
+    en: 'Arrive 10 minutes early and leave the rest to Enjy — you'll feel right at home',
+  },
+
+  // ---- Schedule Preview
+  'schedule.label': { ar: 'الجدول الأسبوعي', en: 'Weekly Schedule' },
+  'schedule.title': { ar: 'مواعيد الأسبوع', en: 'This week's schedule' },
+  'schedule.sub': {
+    ar: 'نظرة سريعة على الكلاسات — المواعيد الكاملة والحجز من التطبيق',
+    en: 'A quick look at the classes — full schedule and booking in the app',
+  },
+  'schedule.cta': { ar: 'شوفي الجدول الكامل في التطبيق', en: 'See full schedule in the app' },
+
+  // ---- FAQ
+  'faq.label': { ar: 'أسئلة شائعة', en: 'FAQ' },
+  'faq.title': { ar: 'عندك سؤال؟', en: 'Got a question?' },
+  'faq.sub': {
+    ar: 'إجابات لأكتر الأسئلة اللي بتوصلنا — ولو محتاجة حاجة تانية، كلّمينا واتساب',
+    en: 'Answers to the most common questions — and if you need anything else, message us on WhatsApp',
+  },
+  'faq.more': { ar: 'لسه عندك سؤال؟ كلّمينا', en: 'Still have a question? Contact us' },
+
   // ---- Retreats
   'retreats.label': { ar: 'الريتريتس', en: 'Retreats' },
   'retreats.title': { ar: 'رحلات تعيدك لنفسك', en: 'Journeys back to yourself' },
