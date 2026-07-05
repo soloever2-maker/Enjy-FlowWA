@@ -183,7 +183,7 @@ export const FAQ_ITEMS = [
     q: { ar: 'هل لازم أجيب معايا مات؟', en: 'Do I need to bring my own mat?' },
     a: {
       ar: 'لأ — عندنا كل الأدوات في الاستوديو. بس لو عندك مات بتحبيها، أهلاً بيها!',
-      en: 'No — we provide all the equipment at the studio. But if you have a mat you love, you're welcome to bring it!',
+      en: 'No — we provide all the equipment at the studio. But if you have a mat you love, you\u2019re welcome to bring it!',
     },
   },
   {
@@ -194,7 +194,7 @@ export const FAQ_ITEMS = [
     },
   },
   {
-    q: { ar: 'إيه سياسة الإلغاء؟', en: 'What's the cancellation policy?' },
+    q: { ar: 'إيه سياسة الإلغاء؟', en: 'What\u2019s the cancellation policy?' },
     a: {
       ar: 'تقدري تلغي الحجز مجانًا قبل الكلاس بـ 12 ساعة — الحصة بترجع لباقتك تلقائيًا.',
       en: 'You can cancel for free up to 12 hours before class — the session goes back to your package automatically.',

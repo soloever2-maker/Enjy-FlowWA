@@ -58,12 +58,12 @@ export const DICT = {
   'first.step3.title': { ar: 'احضري أول كلاس', en: 'Attend your first class' },
   'first.step3.desc': {
     ar: 'تعالي قبلها بـ 10 دقايق، وسيبي الباقي على إنجي — هتحسي إنك في بيتك',
-    en: 'Arrive 10 minutes early and leave the rest to Enjy — you'll feel right at home',
+    en: 'Arrive 10 minutes early and leave the rest to Enjy — you\u2019ll feel right at home',
   },
 
   // ---- Schedule Preview
   'schedule.label': { ar: 'الجدول الأسبوعي', en: 'Weekly Schedule' },
-  'schedule.title': { ar: 'مواعيد الأسبوع', en: 'This week's schedule' },
+  'schedule.title': { ar: 'مواعيد الأسبوع', en: 'This week\u2019s schedule' },
   'schedule.sub': {
     ar: 'نظرة سريعة على الكلاسات — المواعيد الكاملة والحجز من التطبيق',
     en: 'A quick look at the classes — full schedule and booking in the app',
