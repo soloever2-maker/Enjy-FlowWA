@@ -22,11 +22,11 @@ import Reveal from './Reveal'
 type ClassType = { name: string }
 
 const CARD_STYLES = [
-  'md:col-span-1 md:row-span-2 aspect-[3/4]',
-  'md:col-span-1 md:row-span-1 aspect-[4/3]',
-  'md:col-span-1 md:row-span-1 aspect-[4/3]',
-  'md:col-span-1 md:row-span-2 aspect-[3/4]',
-  'md:col-span-2 md:row-span-1 aspect-[21/9]',
+  'aspect-[4/3] md:col-span-1 md:row-span-2 md:aspect-[3/4]',
+  'aspect-[4/3] md:col-span-1 md:row-span-1 md:aspect-[4/3]',
+  'aspect-[4/3] md:col-span-1 md:row-span-1 md:aspect-[4/3]',
+  'aspect-[4/3] md:col-span-1 md:row-span-2 md:aspect-[3/4]',
+  'aspect-[4/3] md:col-span-2 md:row-span-1 md:aspect-[21/9]',
 ]
 
 export default function Classes() {

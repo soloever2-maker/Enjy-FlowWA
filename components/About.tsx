@@ -18,12 +18,12 @@ export default function About() {
         {/* Portrait */}
         <Reveal>
           {ENJY_PHOTO ? (
-            <div className="relative aspect-[4/5] overflow-hidden">
+            <div className="relative aspect-[3/4] md:aspect-[4/5] overflow-hidden">
               <Image
                 src={ENJY_PHOTO}
                 alt="Enjy Gebril"
                 fill
-                className="object-cover"
+                className="object-cover object-[center_45%]"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>

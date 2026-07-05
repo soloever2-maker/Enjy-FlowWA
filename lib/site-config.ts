@@ -16,7 +16,7 @@ export const MAPS_URL = 'https://www.google.com/maps?q=29.978662,30.988026'
 
 // Enjy's portrait for the About section. Drop a photo at /public/enjy.jpg
 // and set this to '/enjy.jpg'. Empty = a clean typographic block renders.
-export const ENJY_PHOTO = ''
+export const ENJY_PHOTO = '/enjy.jpg'
 
 // The live web app (used for "Or use the web app" + privacy policy)
 export const APP_WEB_URL = 'https://wellness-hub-ten.vercel.app'
