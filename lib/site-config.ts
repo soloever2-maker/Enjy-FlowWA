@@ -50,6 +50,17 @@ export const FALLBACK_CLASSES = [
   { name: 'Aqua Aerobics' },
 ]
 
+// Class images — keyed by class name
+export const CLASS_IMAGES: Record<string, string> = {
+  'Power Yoga':             '/classes/power-yoga.jpg',
+  'Mat Pilates':            '/classes/mat-pilates.jpg',
+  'Gentle Yoga & Recovery': '/classes/gentle-yoga.jpg',
+  'Belly Rhythmic Dancing': '/classes/outdoor-meditation.jpg',
+  'Aqua Aerobics':          '/classes/aqua-aerobics.jpg',
+}
+export const CLASS_HERO_IMAGE = '/classes/chair-yoga.jpg'
+export const FALLBACK_CLASS_IMAGE = '/classes/gentle-yoga.jpg'
+
 // Per-class emoji + bilingual one-liners (keyed by class name)
 export const CLASS_META: Record<
   string,
