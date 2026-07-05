@@ -1,7 +1,7 @@
 'use client'
 
-// Hero — contained image + logo block below.
-// Image does NOT fill the screen. Clean, app-like layout.
+// Hero — contained image + transparent logo below.
+// Glo-style: image does NOT fill the screen, no text on image.
 import Image from 'next/image'
 import { useLang } from '@/lib/lang-context'
 import { STATS } from '@/lib/site-config'
@@ -10,7 +10,7 @@ export default function Hero() {
   const { lang, t } = useLang()
 
   return (
-    <section id="top" className="bg-cream pt-[72px] md:pt-[80px]">
+    <section id="top" className="bg-cream pt-14 md:pt-16">
       {/* Hero image — contained, not full-bleed */}
       <div className="relative w-full aspect-[16/9] md:aspect-[21/9] overflow-hidden">
         <Image
@@ -21,9 +21,9 @@ export default function Hero() {
           className="object-cover object-center"
           sizes="100vw"
         />
-        {/* Subtle bottom fade into cream */}
+        {/* Bottom fade into cream */}
         <div
-          className="absolute inset-x-0 bottom-0 h-24"
+          className="absolute inset-x-0 bottom-0 h-20 md:h-28"
           style={{
             background: 'linear-gradient(180deg, transparent 0%, #F5F1E6 100%)',
           }}
@@ -31,16 +31,16 @@ export default function Hero() {
         />
       </div>
 
-      {/* Logo + text content */}
-      <div className="max-w-4xl mx-auto px-6 text-center -mt-8 md:-mt-12 relative z-10">
-        {/* Logo */}
-        <div className="flex justify-center mb-6 md:mb-8">
+      {/* Logo + content */}
+      <div className="max-w-4xl mx-auto px-6 text-center -mt-6 md:-mt-10 relative z-10">
+        {/* Transparent logo */}
+        <div className="flex justify-center mb-8 md:mb-10">
           <Image
-            src="/icon.png"
+            src="/logo-transparent.png"
             alt="Align with Enjy"
-            width={72}
-            height={72}
-            className="md:w-[90px] md:h-[90px]"
+            width={180}
+            height={120}
+            className="w-32 md:w-44 h-auto"
           />
         </div>
 

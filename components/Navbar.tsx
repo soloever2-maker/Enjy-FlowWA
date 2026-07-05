@@ -1,5 +1,7 @@
 'use client'
 
+// Navbar — Glo-style: clean logo left, links + CTA right.
+// Always light bg, transparent logo.
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
@@ -28,26 +30,21 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 bg-cream/95 backdrop-blur-xl ${
-          scrolled ? 'border-b hairline py-2.5' : 'py-3'
+        className={`fixed top-0 inset-x-0 z-50 bg-cream transition-all duration-300 ${
+          scrolled ? 'border-b hairline shadow-sm' : ''
         }`}
       >
-        <nav className="max-w-7xl mx-auto px-5 md:px-6 flex items-center justify-between gap-4">
-          {/* Logo icon + wordmark */}
-          <a
-            href="#top"
-            className="flex items-center gap-2.5"
-          >
+        <nav className="max-w-7xl mx-auto px-5 md:px-6 h-14 md:h-16 flex items-center justify-between gap-4">
+          {/* Logo — transparent PNG, like Glo */}
+          <a href="#top" className="flex-shrink-0">
             <Image
-              src="/icon.png"
-              alt=""
-              width={32}
-              height={32}
-              className="md:w-9 md:h-9"
+              src="/logo-transparent.png"
+              alt="Align with Enjy"
+              width={100}
+              height={40}
+              className="h-8 md:h-10 w-auto object-contain"
+              priority
             />
-            <span className="font-display font-bold text-lg md:text-xl text-terracotta lowercase tracking-tight">
-              align with enjy
-            </span>
           </a>
 
           {/* Desktop links */}
@@ -64,6 +61,7 @@ export default function Navbar() {
             ))}
           </ul>
 
+          {/* Right side */}
           <div className="flex items-center gap-3">
             <button
               onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}
@@ -75,7 +73,7 @@ export default function Navbar() {
 
             <a
               href="#app"
-              className="hidden md:inline-flex eyebrow px-6 py-3 bg-ink text-cream hover:bg-terracotta transition-colors"
+              className="hidden md:inline-flex eyebrow px-6 py-2.5 bg-ink text-cream hover:bg-terracotta transition-colors"
             >
               {t('nav.cta')}
             </a>
@@ -105,12 +103,13 @@ export default function Navbar() {
         }`}
       >
         <div className="flex items-center justify-between px-6 py-4 border-b hairline">
-          <div className="flex items-center gap-2">
-            <Image src="/icon.png" alt="" width={28} height={28} />
-            <span className="font-display font-bold text-terracotta lowercase">
-              align with enjy
-            </span>
-          </div>
+          <Image
+            src="/logo-transparent.png"
+            alt="Align with Enjy"
+            width={80}
+            height={32}
+            className="h-7 w-auto object-contain"
+          />
           <button onClick={() => setOpen(false)} aria-label="Close menu" className="p-1">
             <X className="w-6 h-6 text-ink" />
           </button>
