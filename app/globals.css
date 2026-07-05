@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* ---- Film-grain overlay (SVG turbulence, ~4% opacity) ---- */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---- Organic blob mask used on brand photos ---- */
+.blob {
+  border-radius: 58% 42% 46% 54% / 55% 48% 52% 45%;
+  overflow: hidden;
+}
+
+.arch {
+  border-radius: 999px 999px 28px 28px;
+  overflow: hidden;
+}
+
+/* ---- Sage tittle dot after headline words (the logo's signature) ---- */
+.tittle::after {
+  content: '';
+  display: inline-block;
+  width: 0.18em;
+  height: 0.18em;
+  border-radius: 999px;
+  background: #8fa98f;
+  margin-inline-start: 0.12em;
+  transform: translateY(-0.05em);
+}
+
+/* ---- Horizontal scroll snapping for the reviews rail ---- */
+.snap-rail {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.snap-rail::-webkit-scrollbar {
+  display: none;
+}
+.snap-rail > * {
+  scroll-snap-align: start;
+}
+
+/* ---- Visible keyboard focus ---- */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #c05a2f;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ---- Arabic display headings: Cairo carries Arabic glyphs with
+       heavier weight so serif-latin and arabic feel balanced ---- */
+:lang(ar) .font-display {
+  letter-spacing: 0;
+}
