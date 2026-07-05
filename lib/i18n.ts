@@ -92,6 +92,14 @@ export const DICT = {
   'about.caption.indoor': { ar: 'الاستوديو الداخلي', en: 'The indoor studio' },
   'about.caption.outdoor': { ar: 'مساحة البرجولة المفتوحة', en: 'The open-air pergola' },
 
+  // ---- Studio spaces
+  'studio.label': { ar: 'الاستوديو', en: 'The Studio' },
+  'studio.title': { ar: 'مساحات صُمّمت للسكينة', en: 'Spaces designed for stillness' },
+  'studio.sub': {
+    ar: 'استوديو داخلي دافئ ومساحة مفتوحة بين الخضرة — كل ركن معمول عشان تحسي بالأمان والهدوء',
+    en: 'A warm indoor studio and an open-air space in the green — every corner made to feel safe and calm',
+  },
+
   // ---- Download App
   'app.label': { ar: 'التطبيق', en: 'The App' },
   'app.title.1': { ar: 'كلاسك على بُعد', en: 'Your class is' },

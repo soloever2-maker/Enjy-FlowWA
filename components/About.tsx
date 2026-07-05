@@ -1,8 +1,11 @@
 'use client'
 
+// About Enjy — the person, not the rooms. Portrait slot reads from
+// ENJY_PHOTO in site-config; until a photo is provided, a clean
+// typographic block holds the space.
 import Image from 'next/image'
-import { BadgeCheck } from 'lucide-react'
 import { useLang } from '@/lib/lang-context'
+import { ENJY_PHOTO } from '@/lib/site-config'
 import SectionHeading from './SectionHeading'
 import Reveal from './Reveal'
 
@@ -10,51 +13,47 @@ export default function About() {
   const { t } = useLang()
 
   return (
-    <section id="about" className="py-24 md:py-32 bg-cream overflow-hidden">
-      <div className="max-w-6xl mx-auto px-5 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
-        {/* Studio photo collage — real spaces, organic frames */}
-        <Reveal className="relative">
-          <div className="relative">
-            {/* Indoor studio — tall blob */}
-            <figure className="blob w-[78%] aspect-[3/4] relative shadow-[0_24px_60px_rgba(43,43,38,0.18)]">
+    <section id="about" className="py-28 md:py-36 bg-cream">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+        {/* Portrait */}
+        <Reveal>
+          {ENJY_PHOTO ? (
+            <div className="relative aspect-[4/5] overflow-hidden">
               <Image
-                src="/studio-indoor.jpg"
-                alt={t('about.caption.indoor')}
+                src={ENJY_PHOTO}
+                alt="Enjy Gebril"
                 fill
                 className="object-cover"
-                sizes="(max-width: 1024px) 78vw, 38vw"
+                sizes="(max-width: 1024px) 100vw, 50vw"
               />
-            </figure>
-            {/* Pergola — smaller arch, offset to the end/bottom */}
-            <figure className="arch absolute bottom-[-8%] end-0 w-[52%] aspect-[4/3] shadow-[0_18px_45px_rgba(43,43,38,0.22)] border-4 border-cream">
-              <Image
-                src="/studio-pergola.jpg"
-                alt={t('about.caption.outdoor')}
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 52vw, 26vw"
-              />
-            </figure>
-            {/* Sage tittle-dot echo */}
-            <span
-              className="absolute -top-4 end-[14%] w-6 h-6 rounded-full bg-sage"
-              aria-hidden
-            />
-          </div>
+            </div>
+          ) : (
+            <div className="aspect-[4/5] bg-sage-deep flex items-center justify-center p-10">
+              <p className="font-display font-bold text-cream lowercase text-4xl md:text-5xl leading-tight text-center">
+                align
+                <br />
+                with
+                <br />
+                enjy
+              </p>
+            </div>
+          )}
         </Reveal>
 
         {/* Bio */}
         <Reveal delay={120}>
           <SectionHeading label={t('about.label')} title={t('about.title')} />
-          <div className="-mt-6 space-y-4 text-ink-muted leading-loose text-base md:text-lg">
+          <div className="-mt-8 space-y-5 text-ink-muted leading-loose text-base md:text-lg">
             <p>{t('about.bio.1')}</p>
             <p>{t('about.bio.2')}</p>
           </div>
-          <ul className="mt-8 space-y-3.5">
+          <ul className="mt-10 border-t hairline">
             {(['about.point.1', 'about.point.2', 'about.point.3'] as const).map(
               (k) => (
-                <li key={k} className="flex items-center gap-3 text-ink font-medium">
-                  <BadgeCheck className="w-5 h-5 text-sage-deep shrink-0" />
+                <li
+                  key={k}
+                  className="py-4 border-b hairline text-ink font-medium text-sm md:text-base"
+                >
                   {t(k)}
                 </li>
               )

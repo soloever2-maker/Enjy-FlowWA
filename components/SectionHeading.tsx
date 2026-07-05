@@ -1,32 +1,33 @@
 'use client'
 
-// Shared section heading: small letter-spaced label with the brand's
-// sage dot (the logo's signature tittle), then a large serif title.
+// Minimal section heading: hairline rule + thin uppercase label,
+// then a large serif title. No decorations.
 export default function SectionHeading({
   label,
   title,
   sub,
   light = false,
-  center = false,
 }: {
   label: string
   title: string
   sub?: string
   light?: boolean
-  center?: boolean
 }) {
   return (
-    <div className={`mb-12 md:mb-16 ${center ? 'text-center' : ''}`}>
+    <div className="mb-14 md:mb-20">
       <div
-        className={`inline-flex items-center gap-2.5 text-[0.78rem] font-semibold tracking-[0.28em] uppercase mb-4 ${
-          light ? 'text-sage' : 'text-terracotta'
+        className={`flex items-center gap-5 mb-6 ${
+          light ? 'text-cream/60' : 'text-ink-muted'
         }`}
       >
-        <span className="w-2 h-2 rounded-full bg-sage inline-block" aria-hidden />
-        {label}
+        <span className="eyebrow">{label}</span>
+        <span
+          className={`h-px flex-1 ${light ? 'bg-cream/15' : 'bg-ink/10'}`}
+          aria-hidden
+        />
       </div>
       <h2
-        className={`font-display text-4xl md:text-5xl leading-[1.15] font-bold ${
+        className={`font-display text-4xl md:text-6xl leading-[1.08] font-bold max-w-3xl ${
           light ? 'text-cream' : 'text-ink'
         }`}
       >
@@ -34,9 +35,9 @@ export default function SectionHeading({
       </h2>
       {sub && (
         <p
-          className={`mt-4 text-base md:text-lg max-w-xl leading-relaxed ${
-            light ? 'text-cream/70' : 'text-ink-muted'
-          } ${center ? 'mx-auto' : ''}`}
+          className={`mt-5 text-base md:text-lg max-w-xl leading-relaxed ${
+            light ? 'text-cream/65' : 'text-ink-muted'
+          }`}
         >
           {sub}
         </p>

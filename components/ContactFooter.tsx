@@ -35,29 +35,28 @@ const CARDS = [
 export function Contact() {
   const { t } = useLang()
   return (
-    <section id="contact" className="py-24 md:py-32 bg-cream">
+    <section id="contact" className="py-28 md:py-36 bg-cream">
       <div className="max-w-6xl mx-auto px-5">
         <Reveal>
           <SectionHeading
             label={t('contact.label')}
             title={t('contact.title')}
-            center
           />
         </Reveal>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-3xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
           {CARDS.map((c, i) => (
             <Reveal key={c.titleKey} delay={i * 100}>
               <a
                 href={c.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group block bg-cream-deep rounded-[24px] p-8 text-center transition-all hover:-translate-y-1.5 hover:shadow-[0_18px_45px_rgba(43,43,38,0.12)] h-full"
+                className="group block border hairline p-9 transition-colors hover:bg-ink hover:border-ink h-full"
               >
-                <span className="w-14 h-14 mx-auto rounded-full bg-sage-soft flex items-center justify-center mb-4 transition-colors group-hover:bg-terracotta">
-                  <c.icon className="w-6 h-6 text-sage-deep transition-colors group-hover:text-cream" />
-                </span>
-                <h3 className="font-semibold text-ink mb-1.5">{t(c.titleKey)}</h3>
-                <p className="text-[0.82rem] text-ink-muted leading-relaxed">
+                <c.icon className="w-6 h-6 text-terracotta mb-6" />
+                <h3 className="font-display font-bold text-xl text-ink mb-2 transition-colors group-hover:text-cream">
+                  {t(c.titleKey)}
+                </h3>
+                <p className="text-[0.85rem] text-ink-muted leading-relaxed transition-colors group-hover:text-cream/60">
                   {t(c.subKey)}
                 </p>
               </a>

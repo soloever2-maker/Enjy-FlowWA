@@ -1,7 +1,6 @@
 'use client'
 
 import Image from 'next/image'
-import { ArrowDown } from 'lucide-react'
 import { useLang } from '@/lib/lang-context'
 import { STATS } from '@/lib/site-config'
 
@@ -10,7 +9,7 @@ export default function Hero() {
 
   return (
     <section id="top" className="relative min-h-[100svh] flex items-end">
-      {/* Full-bleed brand photo — the Aswan retreat at golden hour */}
+      {/* Full-bleed brand photo */}
       <Image
         src="/retreat-aswan.jpg"
         alt={t('hero.photo.caption')}
@@ -19,71 +18,59 @@ export default function Hero() {
         className="object-cover object-center"
         sizes="100vw"
       />
-      {/* Warm scrim: cream at the very top (navbar legibility) into deep ink at the base */}
+      {/* Quiet single-direction scrim */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            'linear-gradient(180deg, rgba(245,241,230,0.28) 0%, rgba(43,43,38,0.05) 30%, rgba(43,43,38,0.62) 78%, rgba(43,43,38,0.82) 100%)',
+            'linear-gradient(180deg, rgba(20,20,18,0.34) 0%, rgba(20,20,18,0.06) 34%, rgba(20,20,18,0.55) 76%, rgba(20,20,18,0.78) 100%)',
         }}
         aria-hidden
       />
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-5 pb-14 pt-40">
-        {/* Eyebrow */}
-        <div className="inline-flex items-center gap-2.5 bg-cream/15 backdrop-blur-md border border-cream/25 text-cream text-[0.78rem] font-semibold tracking-[0.22em] uppercase px-4 py-2 rounded-full mb-6">
-          <span className="w-2 h-2 rounded-full bg-sage" aria-hidden />
-          {t('hero.eyebrow')}
-        </div>
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pb-16 pt-44">
+        <p className="eyebrow text-cream/75 mb-6">{t('hero.eyebrow')}</p>
 
-        {/* Headline — the middle word carries the terracotta + sage tittle */}
-        <h1 className="font-display text-cream font-bold leading-[1.08] text-[clamp(2.6rem,7vw,5.2rem)] max-w-3xl">
+        <h1 className="font-display text-cream font-bold leading-[1.05] text-[clamp(2.8rem,7.5vw,6rem)] max-w-4xl">
           {t('hero.title.1')}{' '}
-          <em className={`not-italic text-[#E5A181] ${lang === 'en' ? 'italic' : ''} tittle`}>
+          <em className={lang === 'en' ? 'italic' : 'not-italic'}>
             {t('hero.title.2')}
           </em>{' '}
           {t('hero.title.3')}
         </h1>
 
-        <p className="mt-5 text-cream/85 text-base md:text-xl max-w-xl leading-relaxed">
+        <p className="mt-6 text-cream/80 text-base md:text-xl max-w-xl leading-relaxed">
           {t('hero.sub')}
         </p>
 
-        {/* CTAs */}
-        <div className="mt-8 flex flex-wrap items-center gap-4">
+        <div className="mt-10 flex flex-wrap items-center gap-6">
           <a
             href="#app"
-            className="group inline-flex items-center gap-2.5 bg-terracotta hover:bg-terracotta-deep text-cream font-semibold px-7 py-3.5 rounded-full transition-all hover:-translate-y-0.5"
+            className="eyebrow bg-cream text-ink px-9 py-4 hover:bg-terracotta hover:text-cream transition-colors"
           >
             {t('hero.cta.primary')}
-            <ArrowDown className="w-4 h-4 transition-transform group-hover:translate-y-0.5" />
           </a>
           <a
             href="#classes"
-            className="inline-flex items-center gap-2 text-cream font-medium underline underline-offset-8 decoration-sage decoration-2 hover:decoration-cream transition-colors"
+            className="eyebrow text-cream border-b border-cream/50 pb-1.5 hover:border-cream transition-colors"
           >
             {t('hero.cta.secondary')}
           </a>
         </div>
 
-        {/* Editorial inline stats — serif numbers on a shared baseline */}
-        <div className="mt-12 flex flex-wrap items-end gap-x-10 gap-y-5 border-t border-cream/20 pt-7">
+        {/* Inline stats on a hairline */}
+        <div className="mt-14 flex flex-wrap items-end gap-x-12 gap-y-5 border-t border-cream/20 pt-8">
           {STATS.map((s) => (
-            <div key={s.en} className="flex items-baseline gap-2.5">
+            <div key={s.en} className="flex items-baseline gap-3">
               <span className="font-display font-bold text-3xl md:text-4xl text-cream">
                 {s.value}
               </span>
-              <span className="text-[0.72rem] tracking-[0.18em] uppercase text-cream/65 font-semibold">
+              <span className="eyebrow text-cream/55">
                 {lang === 'ar' ? s.ar : s.en}
               </span>
             </div>
           ))}
         </div>
-
-        {/* Photo caption */}
-        <p className="mt-6 text-[0.72rem] tracking-[0.15em] uppercase text-cream/45">
-          {t('hero.photo.caption')}
-        </p>
       </div>
     </section>
   )

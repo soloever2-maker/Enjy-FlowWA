@@ -1,5 +1,7 @@
 'use client'
 
+// Editorial index: full-width rows with hairline dividers.
+// Premium fashion-catalog treatment — no cards, no emojis.
 import { useEffect, useState } from 'react'
 import { ArrowUpRight } from 'lucide-react'
 import { useLang } from '@/lib/lang-context'
@@ -13,15 +15,6 @@ import SectionHeading from './SectionHeading'
 import Reveal from './Reveal'
 
 type ClassType = { name: string }
-
-// Alternating card tints from the brand palette
-const TINTS = [
-  'bg-sage-soft',
-  'bg-[#F3E2D6]', // dusty terracotta tint
-  'bg-cream-deep',
-  'bg-[#E3E9EC]', // soft slate tint
-  'bg-[#F0EBDD]',
-]
 
 export default function Classes() {
   const { lang, t } = useLang()
@@ -38,8 +31,8 @@ export default function Classes() {
   }, [])
 
   return (
-    <section id="classes" className="py-24 md:py-32 bg-cream">
-      <div className="max-w-6xl mx-auto px-5">
+    <section id="classes" className="py-28 md:py-36 bg-cream">
+      <div className="max-w-7xl mx-auto px-6">
         <Reveal>
           <SectionHeading
             label={t('classes.label')}
@@ -48,27 +41,24 @@ export default function Classes() {
           />
         </Reveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="border-t hairline">
           {classes.map((c, i) => {
             const meta = CLASS_META[c.name] ?? DEFAULT_CLASS_META
             return (
-              <Reveal key={c.name} delay={i * 90}>
+              <Reveal key={c.name} delay={i * 60}>
                 <a
                   href="#app"
-                  className={`group block ${TINTS[i % TINTS.length]} arch p-7 pt-12 h-full transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_45px_rgba(43,43,38,0.12)]`}
+                  className="group grid grid-cols-1 md:grid-cols-[minmax(0,1.1fr),minmax(0,1fr),auto] items-center gap-3 md:gap-10 py-8 md:py-10 border-b hairline transition-colors hover:bg-cream-deep/60 md:px-4 md:-mx-4"
                 >
-                  <span className="text-4xl block mb-5" aria-hidden>
-                    {meta.emoji}
-                  </span>
-                  <h3 className="font-display font-bold text-xl text-ink mb-2">
+                  <h3 className="font-display font-bold text-2xl md:text-4xl text-ink transition-colors group-hover:text-terracotta">
                     {c.name}
                   </h3>
-                  <p className="text-sm text-ink-muted leading-relaxed mb-6 min-h-[2.6rem]">
+                  <p className="text-sm md:text-base text-ink-muted leading-relaxed">
                     {lang === 'ar' ? meta.ar : meta.en}
                   </p>
-                  <span className="inline-flex items-center gap-1.5 text-[0.85rem] font-semibold text-terracotta">
+                  <span className="hidden md:inline-flex items-center gap-2 eyebrow text-ink-muted transition-colors group-hover:text-terracotta">
                     {t('classes.book')}
-                    <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 rtl:rotate-[270deg]" />
+                    <ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" />
                   </span>
                 </a>
               </Reveal>

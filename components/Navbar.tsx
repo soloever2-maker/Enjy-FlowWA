@@ -1,14 +1,12 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
 import { useLang } from '@/lib/lang-context'
 
 const LINKS = [
   { href: '#classes', key: 'nav.classes' },
   { href: '#retreats', key: 'nav.retreats' },
-  { href: '#reviews', key: 'nav.reviews' },
   { href: '#store', key: 'nav.store' },
   { href: '#about', key: 'nav.about' },
   { href: '#contact', key: 'nav.contact' },
@@ -30,33 +28,31 @@ export default function Navbar() {
     <>
       <header
         className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? 'bg-cream/85 backdrop-blur-xl border-b border-ink/5 py-2.5'
-            : 'py-4'
+          scrolled ? 'bg-cream/90 backdrop-blur-xl border-b hairline py-3' : 'py-5'
         }`}
       >
-        <nav className="max-w-6xl mx-auto px-5 flex items-center justify-between gap-4">
-          {/* Wordmark */}
-          <a href="#top" className="flex items-center gap-2.5 shrink-0">
-            <Image
-              src="/logo.png"
-              alt="Align with Enjy"
-              width={34}
-              height={46}
-              className="w-[30px] h-auto"
-            />
-            <span className="font-display font-bold text-lg text-terracotta lowercase tracking-tight hidden sm:block">
-              align with enjy
-            </span>
+        <nav className="max-w-7xl mx-auto px-6 flex items-center justify-between gap-4">
+          {/* Wordmark — pure type, exactly like the logo */}
+          <a
+            href="#top"
+            className={`font-display font-bold text-xl lowercase tracking-tight transition-colors ${
+              scrolled ? 'text-terracotta' : 'text-cream'
+            }`}
+          >
+            align with enjy
           </a>
 
           {/* Desktop links */}
-          <ul className="hidden lg:flex items-center gap-7">
+          <ul className="hidden lg:flex items-center gap-9">
             {LINKS.map((l) => (
               <li key={l.href}>
                 <a
                   href={l.href}
-                  className="text-[0.88rem] font-medium text-ink-muted hover:text-terracotta transition-colors"
+                  className={`eyebrow transition-colors ${
+                    scrolled
+                      ? 'text-ink-muted hover:text-terracotta'
+                      : 'text-cream/85 hover:text-cream'
+                  }`}
                 >
                   {t(l.key)}
                 </a>
@@ -64,28 +60,33 @@ export default function Navbar() {
             ))}
           </ul>
 
-          <div className="flex items-center gap-2.5">
-            {/* Language toggle */}
+          <div className="flex items-center gap-3">
             <button
               onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}
-              className="text-[0.8rem] font-bold px-3.5 py-1.5 rounded-full border border-ink/15 text-ink-muted hover:border-terracotta hover:text-terracotta transition-colors"
+              className={`eyebrow px-2 py-1 transition-colors ${
+                scrolled
+                  ? 'text-ink-muted hover:text-terracotta'
+                  : 'text-cream/85 hover:text-cream'
+              }`}
               aria-label="Switch language"
             >
-              {lang === 'ar' ? 'EN' : 'العربية'}
+              {lang === 'ar' ? 'EN' : 'ع'}
             </button>
 
-            {/* CTA */}
             <a
               href="#app"
-              className="hidden md:inline-flex bg-terracotta hover:bg-terracotta-deep text-cream text-[0.85rem] font-semibold px-5 py-2.5 rounded-full transition-colors"
+              className={`hidden md:inline-flex eyebrow px-6 py-3 transition-colors ${
+                scrolled
+                  ? 'bg-ink text-cream hover:bg-terracotta'
+                  : 'bg-cream text-ink hover:bg-terracotta hover:text-cream'
+              }`}
             >
               {t('nav.cta')}
             </a>
 
-            {/* Mobile hamburger */}
             <button
               onClick={() => setOpen(true)}
-              className="lg:hidden p-1.5 text-ink"
+              className={`lg:hidden p-1.5 ${scrolled ? 'text-ink' : 'text-cream'}`}
               aria-label="Open menu"
             >
               <Menu className="w-6 h-6" />
@@ -103,34 +104,36 @@ export default function Navbar() {
         aria-hidden
       />
       <aside
-        className={`fixed top-0 bottom-0 z-[80] w-[78%] max-w-xs bg-cream shadow-2xl transition-transform duration-400 lg:hidden end-0 ${
+        className={`fixed top-0 bottom-0 z-[80] w-[80%] max-w-xs bg-cream transition-transform duration-300 lg:hidden end-0 ${
           open ? 'translate-x-0' : 'ltr:translate-x-full rtl:-translate-x-full'
         }`}
       >
-        <div className="flex items-center justify-between p-5 border-b border-ink/8">
-          <Image src="/logo.png" alt="" width={28} height={38} className="w-[26px] h-auto" />
+        <div className="flex items-center justify-between px-6 py-5 border-b hairline">
+          <span className="font-display font-bold text-terracotta lowercase">
+            align with enjy
+          </span>
           <button onClick={() => setOpen(false)} aria-label="Close menu" className="p-1">
             <X className="w-6 h-6 text-ink" />
           </button>
         </div>
-        <ul className="p-5 space-y-1">
+        <ul className="px-6 py-4">
           {LINKS.map((l) => (
             <li key={l.href}>
               <a
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="block py-3.5 text-lg font-medium text-ink border-b border-ink/8 hover:text-terracotta transition-colors"
+                className="block py-4 text-lg font-medium text-ink border-b hairline hover:text-terracotta transition-colors"
               >
                 {t(l.key)}
               </a>
             </li>
           ))}
         </ul>
-        <div className="px-5">
+        <div className="px-6 pt-4">
           <a
             href="#app"
             onClick={() => setOpen(false)}
-            className="block text-center bg-terracotta text-cream font-semibold py-3.5 rounded-full"
+            className="block text-center bg-ink text-cream eyebrow py-4"
           >
             {t('nav.cta')}
           </a>

@@ -54,8 +54,6 @@ export default function RootLayout({
       >
         <LangProvider>
           {children}
-          {/* Subtle film-grain overlay over the whole page */}
-          <div className="grain" aria-hidden />
         </LangProvider>
       </body>
     </html>

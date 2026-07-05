@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { MapPin, CalendarDays, Sparkles } from 'lucide-react'
 import { useLang } from '@/lib/lang-context'
 import { supabase } from '@/lib/supabase'
 import SectionHeading from './SectionHeading'
@@ -46,106 +45,88 @@ export default function Retreats() {
     const opts: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'long' }
     const s = new Date(start).toLocaleDateString(locale, opts)
     if (!end) return s
-    const e = new Date(end).toLocaleDateString(locale, {
-      ...opts,
-      year: 'numeric',
-    })
+    const e = new Date(end).toLocaleDateString(locale, { ...opts, year: 'numeric' })
     return `${s} – ${e}`
   }
 
   return (
-    <section id="retreats" className="py-24 md:py-32 bg-cream-deep relative overflow-hidden">
-      <div className="max-w-6xl mx-auto px-5">
-        <Reveal>
-          <SectionHeading
-            label={t('retreats.label')}
-            title={t('retreats.title')}
-            sub={t('retreats.sub')}
-          />
-        </Reveal>
+    <section id="retreats" className="bg-cream">
+      {/* Full-bleed section opener — straight edges, quiet type */}
+      <div className="relative h-[68vh] min-h-[420px]">
+        <Image
+          src="/retreat-aswan.jpg"
+          alt=""
+          fill
+          className="object-cover object-[center_38%]"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-ink/35" aria-hidden />
+        <div className="absolute inset-0 flex items-center">
+          <div className="max-w-7xl mx-auto px-6 w-full">
+            <Reveal>
+              <p className="eyebrow text-cream/75 mb-5">{t('retreats.label')}</p>
+              <h2 className="font-display text-cream font-bold text-4xl md:text-6xl leading-[1.08] max-w-2xl">
+                {t('retreats.title')}
+              </h2>
+              <p className="mt-5 text-cream/80 max-w-xl text-base md:text-lg">
+                {t('retreats.sub')}
+              </p>
+            </Reveal>
+          </div>
+        </div>
+      </div>
 
+      <div className="max-w-7xl mx-auto px-6 py-20 md:py-28">
         {loaded && retreats.length === 0 && (
-          // Graceful empty state — uses the real Aswan photo, never fake data
+          // Quiet empty state — one hairline row, no fake data
           <Reveal>
-            <div className="relative arch overflow-hidden">
-              <Image
-                src="/retreat-aswan.jpg"
-                alt=""
-                width={1066}
-                height={1066}
-                className="w-full h-[380px] object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/25 to-transparent" />
-              <div className="absolute bottom-0 inset-x-0 p-8 md:p-10 text-cream">
-                <Sparkles className="w-6 h-6 text-sage mb-3" aria-hidden />
-                <p className="font-display font-bold text-2xl md:text-3xl max-w-lg leading-snug">
-                  {t('retreats.empty')}
-                </p>
-              </div>
-            </div>
+            <p className="border-t border-b hairline py-10 text-center text-ink-muted eyebrow">
+              {t('retreats.empty')}
+            </p>
           </Reveal>
         )}
 
-        <div className="space-y-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16">
           {retreats.map((r, i) => (
-            <Reveal key={r.id} delay={i * 100}>
-              <article
-                className={`grid grid-cols-1 md:grid-cols-2 gap-0 bg-cream rounded-[28px] overflow-hidden shadow-[0_10px_40px_rgba(43,43,38,0.08)]`}
-              >
-                {/* Photo side — alternates start/end per card */}
-                <div
-                  className={`relative min-h-[260px] md:min-h-[340px] ${
-                    i % 2 === 1 ? 'md:order-2' : ''
-                  }`}
-                >
-                  <Image
-                    src={r.cover_image || '/retreat-aswan.jpg'}
-                    alt={r.title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                </div>
-
-                {/* Text side */}
-                <div className="p-8 md:p-11 flex flex-col justify-center">
-                  <h3 className="font-display font-bold text-2xl md:text-3xl text-ink mb-4">
+            <Reveal key={r.id} delay={i * 90}>
+              <article className="group">
+                <a href="#app" className="block">
+                  <div className="relative aspect-[4/3] overflow-hidden mb-6">
+                    <Image
+                      src={r.cover_image || '/retreat-aswan.jpg'}
+                      alt={r.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  </div>
+                  <p className="eyebrow text-terracotta mb-3">
+                    {r.location} · {fmtDate(r.date, r.end_date)}
+                  </p>
+                  <h3 className="font-display font-bold text-2xl md:text-3xl text-ink mb-3 transition-colors group-hover:text-terracotta">
                     {r.title}
                   </h3>
-                  <div className="space-y-2.5 mb-5">
-                    <p className="flex items-center gap-2.5 text-sm text-ink-muted">
-                      <MapPin className="w-4 h-4 text-terracotta shrink-0" />
-                      {r.location}
-                    </p>
-                    <p className="flex items-center gap-2.5 text-sm text-ink-muted">
-                      <CalendarDays className="w-4 h-4 text-terracotta shrink-0" />
-                      {fmtDate(r.date, r.end_date)}
-                    </p>
-                  </div>
                   {r.description && (
-                    <p className="text-sm md:text-base text-ink-muted leading-relaxed mb-6 line-clamp-3">
+                    <p className="text-sm md:text-base text-ink-muted leading-relaxed line-clamp-2 mb-4">
                       {r.description}
                     </p>
                   )}
-                  <div className="flex items-center justify-between gap-4 border-t border-ink/8 pt-5">
+                  <div className="flex items-center justify-between border-t hairline pt-4">
                     {r.price != null ? (
-                      <span className="font-display font-bold text-xl text-terracotta">
+                      <span className="font-display font-bold text-lg text-ink">
                         {r.price.toLocaleString(lang === 'ar' ? 'ar-EG' : 'en-US')}{' '}
-                        <span className="text-sm font-body font-medium text-ink-muted">
+                        <span className="text-xs font-body font-medium text-ink-muted">
                           {t('retreats.egp')}
                         </span>
                       </span>
                     ) : (
                       <span />
                     )}
-                    <a
-                      href="#app"
-                      className="text-[0.85rem] font-semibold text-terracotta underline underline-offset-4 decoration-sage hover:decoration-terracotta transition-colors"
-                    >
+                    <span className="eyebrow text-ink-muted group-hover:text-terracotta transition-colors">
                       {t('retreats.details')}
-                    </a>
+                    </span>
                   </div>
-                </div>
+                </a>
               </article>
             </Reveal>
           ))}
