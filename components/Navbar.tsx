@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
 import { useLang } from '@/lib/lang-context'
 
@@ -27,19 +28,26 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
-          scrolled ? 'bg-cream/90 backdrop-blur-xl border-b hairline py-3' : 'py-5'
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 bg-cream/95 backdrop-blur-xl ${
+          scrolled ? 'border-b hairline py-2.5' : 'py-3'
         }`}
       >
-        <nav className="max-w-7xl mx-auto px-6 flex items-center justify-between gap-4">
-          {/* Wordmark — pure type, exactly like the logo */}
+        <nav className="max-w-7xl mx-auto px-5 md:px-6 flex items-center justify-between gap-4">
+          {/* Logo icon + wordmark */}
           <a
             href="#top"
-            className={`font-display font-bold text-xl lowercase tracking-tight transition-colors ${
-              scrolled ? 'text-terracotta' : 'text-cream'
-            }`}
+            className="flex items-center gap-2.5"
           >
-            align with enjy
+            <Image
+              src="/icon.png"
+              alt=""
+              width={32}
+              height={32}
+              className="md:w-9 md:h-9"
+            />
+            <span className="font-display font-bold text-lg md:text-xl text-terracotta lowercase tracking-tight">
+              align with enjy
+            </span>
           </a>
 
           {/* Desktop links */}
@@ -48,11 +56,7 @@ export default function Navbar() {
               <li key={l.href}>
                 <a
                   href={l.href}
-                  className={`eyebrow transition-colors ${
-                    scrolled
-                      ? 'text-ink-muted hover:text-terracotta'
-                      : 'text-cream/85 hover:text-cream'
-                  }`}
+                  className="eyebrow text-ink-muted hover:text-terracotta transition-colors"
                 >
                   {t(l.key)}
                 </a>
@@ -63,11 +67,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}
-              className={`eyebrow px-2 py-1 transition-colors ${
-                scrolled
-                  ? 'text-ink-muted hover:text-terracotta'
-                  : 'text-cream/85 hover:text-cream'
-              }`}
+              className="eyebrow px-2 py-1 text-ink-muted hover:text-terracotta transition-colors"
               aria-label="Switch language"
             >
               {lang === 'ar' ? 'EN' : 'ع'}
@@ -75,18 +75,14 @@ export default function Navbar() {
 
             <a
               href="#app"
-              className={`hidden md:inline-flex eyebrow px-6 py-3 transition-colors ${
-                scrolled
-                  ? 'bg-ink text-cream hover:bg-terracotta'
-                  : 'bg-cream text-ink hover:bg-terracotta hover:text-cream'
-              }`}
+              className="hidden md:inline-flex eyebrow px-6 py-3 bg-ink text-cream hover:bg-terracotta transition-colors"
             >
               {t('nav.cta')}
             </a>
 
             <button
               onClick={() => setOpen(true)}
-              className={`lg:hidden p-1.5 ${scrolled ? 'text-ink' : 'text-cream'}`}
+              className="lg:hidden p-1.5 text-ink"
               aria-label="Open menu"
             >
               <Menu className="w-6 h-6" />
@@ -108,10 +104,13 @@ export default function Navbar() {
           open ? 'translate-x-0' : 'ltr:translate-x-full rtl:-translate-x-full'
         }`}
       >
-        <div className="flex items-center justify-between px-6 py-5 border-b hairline">
-          <span className="font-display font-bold text-terracotta lowercase">
-            align with enjy
-          </span>
+        <div className="flex items-center justify-between px-6 py-4 border-b hairline">
+          <div className="flex items-center gap-2">
+            <Image src="/icon.png" alt="" width={28} height={28} />
+            <span className="font-display font-bold text-terracotta lowercase">
+              align with enjy
+            </span>
+          </div>
           <button onClick={() => setOpen(false)} aria-label="Close menu" className="p-1">
             <X className="w-6 h-6 text-ink" />
           </button>
