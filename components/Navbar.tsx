@@ -1,13 +1,15 @@
 'use client'
 
-// Navbar — Glo-style: clean logo left, links + CTA right.
-// Always light bg, transparent logo.
-import { useEffect, useState } from 'react'
+// Navbar — clean desktop links + full-screen mobile overlay menu.
+// Mobile menu: Alo-style full-screen overlay with staggered entrance,
+// large display typography, social links, and language toggle.
+import { useEffect, useState, useCallback } from 'react'
 import Image from 'next/image'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Instagram, MessageCircle } from 'lucide-react'
 import { useLang } from '@/lib/lang-context'
+import { WHATSAPP_URL, INSTAGRAM_URL } from '@/lib/site-config'
 
-const LINKS = [
+const NAV_LINKS = [
   { href: '#classes', key: 'nav.classes' },
   { href: '#retreats', key: 'nav.retreats' },
   { href: '#store', key: 'nav.store' },
@@ -20,6 +22,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
 
+  // Scroll shadow
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24)
     onScroll()
@@ -27,15 +30,39 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  // Lock body scroll when menu is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [open])
+
+  // Close menu on Escape key
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && open) setOpen(false)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [open])
+
+  const close = useCallback(() => setOpen(false), [])
+
   return (
     <>
+      {/* ── Fixed top bar ─────────────────────────────────────── */}
       <header
         className={`fixed top-0 inset-x-0 z-50 bg-cream transition-all duration-300 ${
           scrolled ? 'border-b hairline shadow-sm' : ''
         }`}
       >
         <nav className="max-w-7xl mx-auto px-5 md:px-6 h-14 md:h-16 flex items-center justify-between gap-4">
-          {/* Logo — transparent PNG, like Glo */}
+          {/* Logo */}
           <a href="#top" className="flex-shrink-0">
             <Image
               src="/logo-transparent.png"
@@ -49,7 +76,7 @@ export default function Navbar() {
 
           {/* Desktop links */}
           <ul className="hidden lg:flex items-center gap-9">
-            {LINKS.map((l) => (
+            {NAV_LINKS.map((l) => (
               <li key={l.href}>
                 <a
                   href={l.href}
@@ -63,21 +90,24 @@ export default function Navbar() {
 
           {/* Right side */}
           <div className="flex items-center gap-3">
+            {/* Language toggle — desktop only (mobile has it in the menu) */}
             <button
               onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}
-              className="eyebrow px-2 py-1 text-ink-muted hover:text-terracotta transition-colors"
+              className="hidden lg:inline-flex eyebrow px-2 py-1 text-ink-muted hover:text-terracotta transition-colors"
               aria-label="Switch language"
             >
               {lang === 'ar' ? 'EN' : 'ع'}
             </button>
 
+            {/* CTA — desktop only */}
             <a
               href="#app"
-              className="hidden md:inline-flex eyebrow px-6 py-2.5 bg-ink text-cream hover:bg-terracotta transition-colors"
+              className="hidden lg:inline-flex eyebrow px-6 py-2.5 bg-ink text-cream hover:bg-terracotta transition-colors"
             >
               {t('nav.cta')}
             </a>
 
+            {/* Hamburger — mobile/tablet only */}
             <button
               onClick={() => setOpen(true)}
               className="lg:hidden p-1.5 text-ink"
@@ -89,54 +119,130 @@ export default function Navbar() {
         </nav>
       </header>
 
-      {/* Mobile drawer */}
+      {/* ── Full-screen mobile menu ───────────────────────────── */}
       <div
-        className={`fixed inset-0 z-[70] bg-ink/40 transition-opacity lg:hidden ${
-          open ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        className={`fixed inset-0 z-[100] lg:hidden transition-all duration-500 ${
+          open
+            ? 'opacity-100 pointer-events-auto'
+            : 'opacity-0 pointer-events-none'
         }`}
-        onClick={() => setOpen(false)}
-        aria-hidden
-      />
-      <aside
-        className={`fixed top-0 bottom-0 z-[80] w-[80%] max-w-xs bg-cream transition-transform duration-300 lg:hidden end-0 ${
-          open ? 'translate-x-0' : 'ltr:translate-x-full rtl:-translate-x-full'
-        }`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Navigation menu"
       >
-        <div className="flex items-center justify-between px-6 py-4 border-b hairline">
-          <Image
-            src="/logo-transparent.png"
-            alt="Align with Enjy"
-            width={80}
-            height={32}
-            className="h-7 w-auto object-contain"
-          />
-          <button onClick={() => setOpen(false)} aria-label="Close menu" className="p-1">
-            <X className="w-6 h-6 text-ink" />
-          </button>
-        </div>
-        <ul className="px-6 py-4">
-          {LINKS.map((l) => (
-            <li key={l.href}>
-              <a
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="block py-4 text-lg font-medium text-ink border-b hairline hover:text-terracotta transition-colors"
-              >
-                {t(l.key)}
-              </a>
-            </li>
-          ))}
-        </ul>
-        <div className="px-6 pt-4">
-          <a
-            href="#app"
-            onClick={() => setOpen(false)}
-            className="block text-center bg-ink text-cream eyebrow py-4"
+        {/* Cream background */}
+        <div className="absolute inset-0 bg-cream" />
+
+        {/* Content */}
+        <div className="relative h-full flex flex-col">
+          {/* Top bar — logo + close */}
+          <div className="flex items-center justify-between px-5 h-14">
+            <a href="#top" onClick={close} className="flex-shrink-0">
+              <Image
+                src="/logo-transparent.png"
+                alt="Align with Enjy"
+                width={100}
+                height={40}
+                className="h-8 w-auto object-contain"
+              />
+            </a>
+            <button
+              onClick={close}
+              className="p-1.5 text-ink hover:text-terracotta transition-colors"
+              aria-label="Close menu"
+            >
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+
+          {/* Nav links — centered, large display font */}
+          <div className="flex-1 flex flex-col justify-center px-8">
+            <ul className="space-y-1">
+              {NAV_LINKS.map((l, i) => (
+                <li key={l.href}>
+                  <a
+                    href={l.href}
+                    onClick={close}
+                    className="group flex items-center py-3.5 transition-all"
+                    style={{
+                      transform: open ? 'translateY(0)' : 'translateY(20px)',
+                      opacity: open ? 1 : 0,
+                      transition: `transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${
+                        open ? i * 70 + 100 : 0
+                      }ms, opacity 0.4s ease ${open ? i * 70 + 100 : 0}ms`,
+                    }}
+                  >
+                    {/* Decorative line */}
+                    <span className="hidden sm:block w-0 group-hover:w-10 h-px bg-terracotta transition-all duration-300 me-0 group-hover:me-4" />
+                    <span className="font-display text-ink text-3xl sm:text-4xl font-bold group-hover:text-terracotta transition-colors duration-300">
+                      {t(l.key)}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Bottom section — CTA + social + language */}
+          <div
+            className="px-8 pb-10 space-y-6"
+            style={{
+              transform: open ? 'translateY(0)' : 'translateY(16px)',
+              opacity: open ? 1 : 0,
+              transition: `transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${
+                open ? NAV_LINKS.length * 70 + 200 : 0
+              }ms, opacity 0.4s ease ${open ? NAV_LINKS.length * 70 + 200 : 0}ms`,
+            }}
           >
-            {t('nav.cta')}
-          </a>
+            {/* CTA button */}
+            <a
+              href="#app"
+              onClick={close}
+              className="block text-center eyebrow bg-ink text-cream py-4 hover:bg-terracotta transition-colors"
+            >
+              {t('nav.cta')}
+            </a>
+
+            {/* Social + language row */}
+            <div className="flex items-center justify-center gap-6">
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-ink-muted hover:text-terracotta transition-colors"
+                aria-label="Instagram"
+              >
+                <Instagram className="w-5 h-5" />
+                <span className="text-xs tracking-wider uppercase font-semibold">Instagram</span>
+              </a>
+
+              <span className="w-px h-4 bg-ink/15" aria-hidden />
+
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-ink-muted hover:text-terracotta transition-colors"
+                aria-label="WhatsApp"
+              >
+                <MessageCircle className="w-5 h-5" />
+                <span className="text-xs tracking-wider uppercase font-semibold">WhatsApp</span>
+              </a>
+
+              <span className="w-px h-4 bg-ink/15" aria-hidden />
+
+              {/* Language toggle */}
+              <button
+                onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}
+                className="eyebrow text-ink-muted hover:text-terracotta transition-colors px-1"
+                aria-label="Switch language"
+              >
+                {lang === 'ar' ? 'EN' : 'عربي'}
+              </button>
+            </div>
+          </div>
         </div>
-      </aside>
+      </div>
     </>
   )
 }
