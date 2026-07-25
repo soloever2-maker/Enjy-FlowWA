@@ -1,13 +1,13 @@
 'use client'
 
-// Navbar — clean desktop links + full-screen mobile overlay menu.
-// Mobile menu: Alo-style full-screen overlay with staggered entrance,
-// large display typography, social links, and language toggle.
+// Navbar — clean desktop links + full-screen mobile overlay menu
+// with floating botanical decorations and horizontal text logo.
 import { useEffect, useState, useCallback } from 'react'
 import Image from 'next/image'
 import { Menu, X, Instagram, MessageCircle } from 'lucide-react'
 import { useLang } from '@/lib/lang-context'
 import { WHATSAPP_URL, INSTAGRAM_URL } from '@/lib/site-config'
+import FloatingBotanicals from './FloatingBotanicals'
 
 const NAV_LINKS = [
   { href: '#classes', key: 'nav.classes' },
@@ -16,6 +16,18 @@ const NAV_LINKS = [
   { href: '#about', key: 'nav.about' },
   { href: '#contact', key: 'nav.contact' },
 ] as const
+
+/* ── Horizontal text logo (replaces tiny vertical PNG on mobile) ── */
+function BrandLogo({ size = 'sm' }: { size?: 'sm' | 'md' }) {
+  const text = size === 'sm' ? 'text-base' : 'text-lg'
+  return (
+    <span className={`font-display italic ${text} leading-none tracking-tight select-none`}>
+      <span className="text-terracotta">align </span>
+      <span className="text-sage-deep">with </span>
+      <span className="text-terracotta">enjy</span>
+    </span>
+  )
+}
 
 export default function Navbar() {
   const { lang, setLang, t } = useLang()
@@ -37,12 +49,10 @@ export default function Navbar() {
     } else {
       document.body.style.overflow = ''
     }
-    return () => {
-      document.body.style.overflow = ''
-    }
+    return () => { document.body.style.overflow = '' }
   }, [open])
 
-  // Close menu on Escape key
+  // Close on Escape
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && open) setOpen(false)
@@ -62,14 +72,19 @@ export default function Navbar() {
         }`}
       >
         <nav className="max-w-7xl mx-auto px-5 md:px-6 h-14 md:h-16 flex items-center justify-between gap-4">
-          {/* Logo */}
+          {/* Logo — text on mobile, PNG on desktop */}
           <a href="#top" className="flex-shrink-0">
+            {/* Mobile: horizontal text logo */}
+            <span className="lg:hidden">
+              <BrandLogo size="sm" />
+            </span>
+            {/* Desktop: PNG logo */}
             <Image
               src="/logo-transparent.png"
               alt="Align with Enjy"
               width={100}
               height={40}
-              className="h-8 md:h-10 w-auto object-contain"
+              className="hidden lg:block h-10 w-auto object-contain"
               priority
             />
           </a>
@@ -90,7 +105,7 @@ export default function Navbar() {
 
           {/* Right side */}
           <div className="flex items-center gap-3">
-            {/* Language toggle — desktop only (mobile has it in the menu) */}
+            {/* Language toggle — desktop only */}
             <button
               onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}
               className="hidden lg:inline-flex eyebrow px-2 py-1 text-ink-muted hover:text-terracotta transition-colors"
@@ -107,7 +122,7 @@ export default function Navbar() {
               {t('nav.cta')}
             </a>
 
-            {/* Hamburger — mobile/tablet only */}
+            {/* Hamburger — mobile/tablet */}
             <button
               onClick={() => setOpen(true)}
               className="lg:hidden p-1.5 text-ink"
@@ -133,18 +148,15 @@ export default function Navbar() {
         {/* Cream background */}
         <div className="absolute inset-0 bg-cream" />
 
-        {/* Content */}
-        <div className="relative h-full flex flex-col">
+        {/* Floating botanicals — behind content */}
+        <FloatingBotanicals className="z-0" />
+
+        {/* Content — above botanicals */}
+        <div className="relative z-10 h-full flex flex-col">
           {/* Top bar — logo + close */}
           <div className="flex items-center justify-between px-5 h-14">
             <a href="#top" onClick={close} className="flex-shrink-0">
-              <Image
-                src="/logo-transparent.png"
-                alt="Align with Enjy"
-                width={100}
-                height={40}
-                className="h-8 w-auto object-contain"
-              />
+              <BrandLogo size="sm" />
             </a>
             <button
               onClick={close}
@@ -172,7 +184,6 @@ export default function Navbar() {
                       }ms, opacity 0.4s ease ${open ? i * 70 + 100 : 0}ms`,
                     }}
                   >
-                    {/* Decorative line */}
                     <span className="hidden sm:block w-0 group-hover:w-10 h-px bg-terracotta transition-all duration-300 me-0 group-hover:me-4" />
                     <span className="font-display text-ink text-3xl sm:text-4xl font-bold group-hover:text-terracotta transition-colors duration-300">
                       {t(l.key)}
@@ -183,7 +194,7 @@ export default function Navbar() {
             </ul>
           </div>
 
-          {/* Bottom section — CTA + social + language */}
+          {/* Bottom — CTA + social + language */}
           <div
             className="px-8 pb-10 space-y-6"
             style={{
@@ -194,7 +205,6 @@ export default function Navbar() {
               }ms, opacity 0.4s ease ${open ? NAV_LINKS.length * 70 + 200 : 0}ms`,
             }}
           >
-            {/* CTA button */}
             <a
               href="#app"
               onClick={close}
@@ -203,7 +213,6 @@ export default function Navbar() {
               {t('nav.cta')}
             </a>
 
-            {/* Social + language row */}
             <div className="flex items-center justify-center gap-6">
               <a
                 href={INSTAGRAM_URL}
@@ -231,7 +240,6 @@ export default function Navbar() {
 
               <span className="w-px h-4 bg-ink/15" aria-hidden />
 
-              {/* Language toggle */}
               <button
                 onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}
                 className="eyebrow text-ink-muted hover:text-terracotta transition-colors px-1"
