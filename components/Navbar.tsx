@@ -20,11 +20,13 @@ const NAV_LINKS = [
 
 /* ── Horizontal text logo ─────────────────────────────────────── */
 function BrandLogo({ size = 'sm' }: { size?: 'sm' | 'md' }) {
-  const text = size === 'sm' ? 'text-base' : 'text-lg'
+  const text = size === 'sm' ? 'text-[0.95rem]' : 'text-lg'
   return (
-    <span className={`font-display italic ${text} leading-none tracking-tight select-none`}>
-      <span className="text-terracotta">align </span>
-      <span className="text-sage-deep">with </span>
+    <span className={`font-display italic ${text} leading-none tracking-tight select-none inline-flex items-center gap-[5px]`}>
+      <span className="text-terracotta">align</span>
+      <span className="text-sage w-[5px] h-[5px] rounded-full bg-sage inline-block flex-shrink-0" />
+      <span className="text-sage-deep">with</span>
+      <span className="text-sage w-[5px] h-[5px] rounded-full bg-sage inline-block flex-shrink-0" />
       <span className="text-terracotta">enjy</span>
     </span>
   )
@@ -106,7 +108,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}
-              className="hidden lg:inline-flex eyebrow px-2 py-1 text-ink-muted hover:text-terracotta transition-colors"
+              className="eyebrow px-2 py-1 text-ink-muted hover:text-terracotta transition-colors"
               aria-label="Switch language"
             >
               {lang === 'ar' ? 'EN' : 'ع'}
