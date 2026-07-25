@@ -51,9 +51,10 @@ export default function RootLayout({
 }) {
   return (
     // Arabic is the default; LangProvider flips lang/dir on the client
-    <html lang="ar" dir="rtl" suppressHydrationWarning>
+    <html lang="ar" dir="rtl" suppressHydrationWarning style={{ backgroundColor: '#F5F1E6' }}>
       <body
         className={`${playfair.variable} ${dmsans.variable} ${cairo.variable} font-body bg-cream text-ink antialiased`}
+        style={{ backgroundColor: '#F5F1E6' }}
       >
         <LangProvider>
           {children}
