@@ -38,12 +38,6 @@ const SLIDES: HeroSlide[] = [
     zoomOrigin: 'right center',
   },
   {
-    src: '/hero-waterfall.jpg',
-    alt: 'Tree pose at a waterfall',
-    position: 'center 35%',
-    zoomOrigin: 'center top',
-  },
-  {
     src: '/hero-valley.jpg',
     alt: 'Warrior pose in a green valley',
     position: 'center 40%',
@@ -63,8 +57,8 @@ const SLIDES: HeroSlide[] = [
   },
 ]
 
-const DURATION = 6000 // ms each slide stays visible
-const FADE_MS = 1400  // crossfade length (CSS transition)
+const DURATION = 4500 // ms each slide stays visible
+const FADE_MS = 1000  // crossfade length (CSS transition)
 
 /* ── Component ───────────────────────────────────────────────── */
 
