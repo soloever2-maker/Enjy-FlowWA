@@ -172,9 +172,9 @@ export default function Hero() {
       </div>
 
       {/* ── Logo + content ─────────────────────────────────── */}
-      <div className="relative overflow-hidden">
-        {/* Botanical decorations — visible on the wide margins */}
-        <FloatingBotanicals className="hidden md:block" />
+      <div className="relative">
+        {/* Botanical decorations */}
+        <FloatingBotanicals />
 
         <div className="max-w-4xl mx-auto px-6 text-center -mt-6 md:-mt-10 relative z-10">
         {/* Transparent logo */}
