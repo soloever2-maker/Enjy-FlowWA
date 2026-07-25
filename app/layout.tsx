@@ -25,6 +25,9 @@ export const metadata: Metadata = {
   title: 'Align with Enjy — Ladies-Only Yoga & Wellness Studio',
   description:
     'استوديو يوجا وويلنس للسيدات فقط بقيادة إنجي جبريل — كلاسات، ريتريتس، ومجتمع نسائي آمن وداعم. Yoga · Fitness · Wellness, a ladies-only studio in Egypt.',
+  // Tells the browser (especially iOS Safari) to paint the status bar
+  // and any exposed chrome area in cream instead of white.
+  themeColor: '#F5F1E6',
   openGraph: {
     title: 'Align with Enjy — Yoga · Fitness · Wellness',
     description:
