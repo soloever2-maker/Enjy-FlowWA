@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { useState, useEffect, useRef } from 'react'
 import { useLang } from '@/lib/lang-context'
 import { STATS } from '@/lib/site-config'
+import FloatingBotanicals from './FloatingBotanicals'
 
 /* ── Slide config ────────────────────────────────────────────── */
 
@@ -170,8 +171,12 @@ export default function Hero() {
         />
       </div>
 
-      {/* ── Logo + content (unchanged) ──────────────────────── */}
-      <div className="max-w-4xl mx-auto px-6 text-center -mt-6 md:-mt-10 relative z-10">
+      {/* ── Logo + content ─────────────────────────────────── */}
+      <div className="relative overflow-hidden">
+        {/* Botanical decorations — visible on the wide margins */}
+        <FloatingBotanicals className="hidden md:block" />
+
+        <div className="max-w-4xl mx-auto px-6 text-center -mt-6 md:-mt-10 relative z-10">
         {/* Transparent logo */}
         <div className="flex justify-center mb-8 md:mb-10">
           <Image
@@ -235,6 +240,7 @@ export default function Hero() {
             </div>
           ))}
         </div>
+      </div>
       </div>
     </section>
   )
