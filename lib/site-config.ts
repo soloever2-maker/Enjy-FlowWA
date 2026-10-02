@@ -5,8 +5,10 @@
 
 // Store links: leave empty ("") to show the badge in "Soon" state.
 // When the app goes live, paste the real URL — one line, done.
-export const APP_STORE_URL = ''
-export const PLAY_STORE_URL = ''
+export const APP_STORE_URL =
+  'https://apps.apple.com/eg/app/align-with-enjy/id6789882055'
+export const PLAY_STORE_URL =
+  'https://play.google.com/store/apps/details?id=com.alignwithenjy.app'
 
 // Official channels (same links used inside the app)
 export const WHATSAPP_NUMBER = '201063751653'
