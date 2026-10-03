@@ -159,6 +159,7 @@ export const DICT = {
   'app.playstore.top': { ar: 'قريبًا على', en: 'Coming soon on' },
   'app.playstore.top.live': { ar: 'حمّليه من', en: 'Get it on' },
   'app.web': { ar: 'أو استخدمي نسخة الويب', en: 'Or use the web app' },
+  'popup.continue': { ar: 'تصفحي الموقع', en: 'Continue to the site' },
 
   // ---- Contact
   'contact.label': { ar: 'تواصلي معنا', en: 'Contact' },
