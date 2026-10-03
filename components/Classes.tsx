@@ -1,7 +1,8 @@
 'use client'
 
-// Photography-led class cards — editorial image grid with
-// duration + level badges, matching the app's class detail cards.
+// Photography-led class cards — an even two-column grid with
+// duration + level badges. Every card has the same shape; when the
+// number of classes is odd, the last card sits centered on its own row.
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { ArrowUpRight, Clock } from 'lucide-react'
@@ -20,14 +21,6 @@ import SectionHeading from './SectionHeading'
 import Reveal from './Reveal'
 
 type ClassType = { name: string }
-
-const CARD_STYLES = [
-  'aspect-[4/3] md:col-span-1 md:row-span-2 md:aspect-[3/4]',
-  'aspect-[4/3] md:col-span-1 md:row-span-1 md:aspect-[4/3]',
-  'aspect-[4/3] md:col-span-1 md:row-span-1 md:aspect-[4/3]',
-  'aspect-[4/3] md:col-span-1 md:row-span-2 md:aspect-[3/4]',
-  'aspect-[4/3] md:col-span-2 md:row-span-1 md:aspect-[21/9]',
-]
 
 export default function Classes() {
   const { lang, t } = useLang()
@@ -59,19 +52,27 @@ export default function Classes() {
             const meta = CLASS_META[c.name] ?? DEFAULT_CLASS_META
             const image = CLASS_IMAGES[c.name] ?? FALLBACK_CLASS_IMAGE
             const details = CLASS_DETAILS[c.name] ?? DEFAULT_CLASS_DETAILS
-            const style = CARD_STYLES[i % CARD_STYLES.length]
+            const isLastOdd =
+              classes.length % 2 === 1 && i === classes.length - 1
 
             return (
-              <Reveal key={c.name} delay={i * 80}>
+              <Reveal
+                key={c.name}
+                delay={(i % 2) * 100}
+                className={
+                  isLastOdd ? 'md:col-span-2 md:w-1/2 md:mx-auto md:px-[5px]' : ''
+                }
+              >
                 <a
                   href="#app"
-                  className={`group relative block overflow-hidden ${style}`}
+                  className="group relative block overflow-hidden bg-ink/5 aspect-[3/2]"
                 >
                   <Image
                     src={image}
                     alt={c.name}
                     fill
                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    quality={90}
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
 
