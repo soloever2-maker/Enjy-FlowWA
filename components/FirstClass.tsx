@@ -55,13 +55,13 @@ export default function FirstClass() {
         <Reveal delay={400}>
           <div className="mt-16 pt-10 border-t border-cream/10 flex flex-wrap items-center gap-6">
             <a
-              href="#app"
+              href="/#app"
               className="eyebrow bg-cream text-ink px-9 py-4 hover:bg-terracotta hover:text-cream transition-colors"
             >
               {t('hero.cta.primary')}
             </a>
             <a
-              href="#classes"
+              href="/classes"
               className="eyebrow text-cream/70 border-b border-cream/30 pb-1.5 hover:text-cream hover:border-cream transition-colors"
             >
               {t('hero.cta.secondary')}

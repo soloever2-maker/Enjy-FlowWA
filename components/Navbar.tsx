@@ -5,17 +5,19 @@
 // Mobile menu only mounts in DOM when open (no hidden fixed layers).
 import { useEffect, useState, useCallback } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Menu, X, Instagram, MessageCircle } from 'lucide-react'
 import { useLang } from '@/lib/lang-context'
 import { WHATSAPP_URL, INSTAGRAM_URL } from '@/lib/site-config'
 import FloatingBotanicals from './FloatingBotanicals'
 
 const NAV_LINKS = [
-  { href: '#classes', key: 'nav.classes' },
-  { href: '#retreats', key: 'nav.retreats' },
-  { href: '#store', key: 'nav.store' },
-  { href: '#about', key: 'nav.about' },
-  { href: '#contact', key: 'nav.contact' },
+  { href: '/classes', key: 'nav.classes' },
+  { href: '/retreats', key: 'nav.retreats' },
+  { href: '/store', key: 'nav.store' },
+  { href: '/about', key: 'nav.about' },
+  { href: '/contact', key: 'nav.contact' },
 ] as const
 
 /* ── Horizontal text logo ─────────────────────────────────────── */
@@ -36,6 +38,7 @@ export default function Navbar() {
   const { lang, setLang, t } = useLang()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const pathname = usePathname()
 
   // Scroll shadow
   useEffect(() => {
@@ -76,7 +79,7 @@ export default function Navbar() {
       >
         <nav className="max-w-7xl mx-auto px-5 md:px-6 h-14 md:h-16 flex items-center justify-between gap-4">
           {/* Logo — text on mobile, PNG on desktop */}
-          <a href="#top" className="flex-shrink-0">
+          <Link href="/" className="flex-shrink-0">
             <span className="lg:hidden">
               <BrandLogo size="sm" />
             </span>
@@ -88,18 +91,21 @@ export default function Navbar() {
               className="hidden lg:block h-10 w-auto object-contain"
               priority
             />
-          </a>
+          </Link>
 
           {/* Desktop links */}
           <ul className="hidden lg:flex items-center gap-9">
             {NAV_LINKS.map((l) => (
               <li key={l.href}>
-                <a
+                <Link
                   href={l.href}
-                  className="eyebrow text-ink-muted hover:text-terracotta transition-colors"
+                  aria-current={pathname === l.href ? 'page' : undefined}
+                  className={`eyebrow hover:text-terracotta transition-colors ${
+                    pathname === l.href ? 'text-terracotta' : 'text-ink-muted'
+                  }`}
                 >
                   {t(l.key)}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -114,12 +120,12 @@ export default function Navbar() {
               {lang === 'ar' ? 'EN' : 'ع'}
             </button>
 
-            <a
-              href="#app"
+            <Link
+              href="/#app"
               className="hidden lg:inline-flex eyebrow px-6 py-2.5 bg-ink text-cream hover:bg-terracotta transition-colors"
             >
               {t('nav.cta')}
-            </a>
+            </Link>
 
             <button
               onClick={() => setOpen(true)}
@@ -151,9 +157,9 @@ export default function Navbar() {
           <div className="relative z-10 h-full flex flex-col">
             {/* Top bar — logo + close */}
             <div className="flex items-center justify-between px-5 h-14">
-              <a href="#top" onClick={close} className="flex-shrink-0">
+              <Link href="/" onClick={close} className="flex-shrink-0">
                 <BrandLogo size="sm" />
-              </a>
+              </Link>
               <button
                 onClick={close}
                 className="p-1.5 text-ink hover:text-terracotta transition-colors"
@@ -172,16 +178,21 @@ export default function Navbar() {
                     className="animate-menuSlideUp"
                     style={{ animationDelay: `${i * 70 + 80}ms` }}
                   >
-                    <a
+                    <Link
                       href={l.href}
                       onClick={close}
+                      aria-current={pathname === l.href ? 'page' : undefined}
                       className="group flex items-center py-3.5"
                     >
                       <span className="hidden sm:block w-0 group-hover:w-10 h-px bg-terracotta transition-all duration-300 me-0 group-hover:me-4" />
-                      <span className="font-display text-ink text-3xl sm:text-4xl font-bold group-hover:text-terracotta transition-colors duration-300">
+                      <span
+                        className={`font-display text-3xl sm:text-4xl font-bold group-hover:text-terracotta transition-colors duration-300 ${
+                          pathname === l.href ? 'text-terracotta' : 'text-ink'
+                        }`}
+                      >
                         {t(l.key)}
                       </span>
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -192,13 +203,13 @@ export default function Navbar() {
               className="px-8 pb-10 space-y-6 animate-menuSlideUp"
               style={{ animationDelay: `${NAV_LINKS.length * 70 + 180}ms` }}
             >
-              <a
-                href="#app"
+              <Link
+                href="/#app"
                 onClick={close}
                 className="block text-center eyebrow bg-ink text-cream py-4 hover:bg-terracotta transition-colors"
               >
                 {t('nav.cta')}
-              </a>
+              </Link>
 
               <div className="flex items-center justify-center gap-6">
                 <a

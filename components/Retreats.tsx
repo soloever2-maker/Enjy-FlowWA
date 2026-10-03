@@ -90,7 +90,7 @@ export default function Retreats() {
           {retreats.map((r, i) => (
             <Reveal key={r.id} delay={i * 90}>
               <article className="group">
-                <a href="#app" className="block">
+                <a href="/#app" className="block">
                   <div className="relative aspect-[4/3] overflow-hidden mb-6">
                     <Image
                       src={r.cover_image || '/retreat-aswan.jpg'}

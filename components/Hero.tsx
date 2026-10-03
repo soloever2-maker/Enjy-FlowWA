@@ -78,13 +78,13 @@ export default function Hero() {
         {/* CTAs */}
         <div className="mt-8 md:mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
-            href="#app"
+            href="/#app"
             className="eyebrow bg-ink text-cream px-9 py-4 hover:bg-terracotta transition-colors w-full sm:w-auto text-center"
           >
             {t('hero.cta.primary')}
           </a>
           <a
-            href="#classes"
+            href="/classes"
             className="eyebrow text-ink border-b border-ink/30 pb-1.5 hover:text-terracotta hover:border-terracotta transition-colors"
           >
             {t('hero.cta.secondary')}

@@ -64,7 +64,7 @@ export default function Classes() {
                 }
               >
                 <a
-                  href="#app"
+                  href="/#app"
                   className="group relative block overflow-hidden bg-ink/5 aspect-[3/2]"
                 >
                   <Image
