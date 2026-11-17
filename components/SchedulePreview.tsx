@@ -7,13 +7,15 @@ import { useLang } from '@/lib/lang-context'
 import { SCHEDULE_PREVIEW, CLASS_META, DEFAULT_CLASS_META, APP_WEB_URL } from '@/lib/site-config'
 import SectionHeading from './SectionHeading'
 import Reveal from './Reveal'
+import FloatingBotanicals from './FloatingBotanicals'
 
 export default function SchedulePreview() {
   const { lang, t } = useLang()
 
   return (
-    <section id="schedule" className="py-28 md:py-36 bg-cream">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="schedule" className="relative overflow-hidden py-28 md:py-36 bg-cream">
+      <FloatingBotanicals mirror />
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
         <Reveal>
           <SectionHeading
             label={t('schedule.label')}

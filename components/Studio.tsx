@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { useLang } from '@/lib/lang-context'
 import SectionHeading from './SectionHeading'
 import Reveal from './Reveal'
+import FloatingBotanicals from './FloatingBotanicals'
 
 const SPACES = [
   {
@@ -31,8 +32,9 @@ export default function Studio() {
   const { t } = useLang()
 
   return (
-    <section id="studio" className="py-28 md:py-36 bg-cream-deep">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="studio" className="relative overflow-hidden py-28 md:py-36 bg-cream-deep">
+      <FloatingBotanicals mirror />
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
         <Reveal>
           <SectionHeading
             label={t('studio.label')}

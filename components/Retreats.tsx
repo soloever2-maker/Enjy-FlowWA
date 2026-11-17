@@ -6,6 +6,7 @@ import { useLang } from '@/lib/lang-context'
 import { supabase } from '@/lib/supabase'
 import SectionHeading from './SectionHeading'
 import Reveal from './Reveal'
+import FloatingBotanicals from './FloatingBotanicals'
 
 type Retreat = {
   id: string
@@ -76,7 +77,9 @@ export default function Retreats() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-20 md:py-28">
+      <div className="relative overflow-hidden">
+      <FloatingBotanicals />
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 md:py-28">
         {loaded && retreats.length === 0 && (
           // Quiet empty state — one hairline row, no fake data
           <Reveal>
@@ -131,6 +134,7 @@ export default function Retreats() {
             </Reveal>
           ))}
         </div>
+      </div>
       </div>
     </section>
   )

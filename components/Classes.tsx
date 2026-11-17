@@ -19,6 +19,7 @@ import {
 } from '@/lib/site-config'
 import SectionHeading from './SectionHeading'
 import Reveal from './Reveal'
+import FloatingBotanicals from './FloatingBotanicals'
 
 type ClassType = { name: string }
 
@@ -37,8 +38,9 @@ export default function Classes() {
   }, [])
 
   return (
-    <section id="classes" className="py-28 md:py-36 bg-cream">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="classes" className="relative overflow-hidden py-28 md:py-36 bg-cream">
+      <FloatingBotanicals />
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
         <Reveal>
           <SectionHeading
             label={t('classes.label')}

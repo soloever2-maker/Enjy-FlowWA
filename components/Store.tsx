@@ -9,6 +9,7 @@ import {
 } from '@/lib/site-config'
 import SectionHeading from './SectionHeading'
 import Reveal from './Reveal'
+import FloatingBotanicals from './FloatingBotanicals'
 
 export default function Store() {
   const { lang, t } = useLang()
@@ -17,8 +18,9 @@ export default function Store() {
   )}`
 
   return (
-    <section id="store" className="py-28 md:py-36 bg-cream">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="store" className="relative overflow-hidden py-28 md:py-36 bg-cream">
+      <FloatingBotanicals />
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
         <Reveal>
           <SectionHeading
             label={t('store.label')}

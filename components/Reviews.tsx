@@ -7,6 +7,7 @@ import { useLang } from '@/lib/lang-context'
 import { supabase } from '@/lib/supabase'
 import Reveal from './Reveal'
 import BrandIcon from './BrandIcon'
+import FloatingBotanicals from './FloatingBotanicals'
 
 type Review = {
   id: string
@@ -37,8 +38,9 @@ export default function Reviews() {
       : null
 
   return (
-    <section id="reviews" className="py-28 md:py-36 bg-sage-soft">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="reviews" className="relative overflow-hidden py-28 md:py-36 bg-sage-soft">
+      <FloatingBotanicals mirror />
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
         <Reveal>
           <div className="flex items-center gap-5 mb-6 text-ink-muted">
             <span className="eyebrow">{t('reviews.label')}</span>

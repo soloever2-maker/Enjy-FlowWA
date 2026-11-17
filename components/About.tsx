@@ -9,13 +9,15 @@ import { ENJY_PHOTO } from '@/lib/site-config'
 import SectionHeading from './SectionHeading'
 import Reveal from './Reveal'
 import BrandIcon from './BrandIcon'
+import FloatingBotanicals from './FloatingBotanicals'
 
 export default function About() {
   const { t } = useLang()
 
   return (
-    <section id="about" className="py-28 md:py-36 bg-cream">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+    <section id="about" className="relative overflow-hidden py-28 md:py-36 bg-cream">
+      <FloatingBotanicals />
+      <div className="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
         {/* Portrait */}
         <Reveal className="relative">
           {/* Balance circle — Soft Sage disc behind the arch portrait */}

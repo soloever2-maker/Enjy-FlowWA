@@ -131,10 +131,18 @@ const ELEMENTS: FloralEl[] = [
 
 /* ── Component ───────────────────────────────────────────────── */
 
-export default function FloatingBotanicals({ className = '' }: { className?: string }) {
+// mirror: flips the layout so sections next to each other don't look identical.
+export default function FloatingBotanicals({
+  className = '',
+  mirror = false,
+}: {
+  className?: string
+  mirror?: boolean
+}) {
   return (
     <div
       className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}
+      style={mirror ? { transform: 'scaleX(-1)' } : undefined}
       aria-hidden="true"
     >
       {ELEMENTS.map((el, i) => {

@@ -8,6 +8,7 @@ import { useLang } from '@/lib/lang-context'
 import { FAQ_ITEMS, WHATSAPP_URL } from '@/lib/site-config'
 import SectionHeading from './SectionHeading'
 import Reveal from './Reveal'
+import FloatingBotanicals from './FloatingBotanicals'
 
 export default function FAQ() {
   const { lang, t } = useLang()
@@ -16,8 +17,9 @@ export default function FAQ() {
   const toggle = (i: number) => setOpen(open === i ? null : i)
 
   return (
-    <section id="faq" className="py-28 md:py-36 bg-cream">
-      <div className="max-w-3xl mx-auto px-6">
+    <section id="faq" className="relative overflow-hidden py-28 md:py-36 bg-cream">
+      <FloatingBotanicals mirror />
+      <div className="relative z-10 max-w-3xl mx-auto px-6">
         <Reveal>
           <SectionHeading
             label={t('faq.label')}

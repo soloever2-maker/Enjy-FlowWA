@@ -11,6 +11,7 @@ import {
 } from '@/lib/site-config'
 import SectionHeading from './SectionHeading'
 import Reveal from './Reveal'
+import FloatingBotanicals from './FloatingBotanicals'
 
 const CARDS = [
   {
@@ -36,8 +37,9 @@ const CARDS = [
 export function Contact() {
   const { t } = useLang()
   return (
-    <section id="contact" className="py-28 md:py-36 bg-cream">
-      <div className="max-w-6xl mx-auto px-5">
+    <section id="contact" className="relative overflow-hidden py-28 md:py-36 bg-cream">
+      <FloatingBotanicals />
+      <div className="relative z-10 max-w-6xl mx-auto px-5">
         <Reveal>
           <SectionHeading
             label={t('contact.label')}
