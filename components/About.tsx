@@ -8,6 +8,7 @@ import { useLang } from '@/lib/lang-context'
 import { ENJY_PHOTO } from '@/lib/site-config'
 import SectionHeading from './SectionHeading'
 import Reveal from './Reveal'
+import BrandIcon from './BrandIcon'
 
 export default function About() {
   const { t } = useLang()
@@ -53,16 +54,21 @@ export default function About() {
             <p>{t('about.bio.2')}</p>
           </div>
           <ul className="mt-10 border-t hairline">
-            {(['about.point.1', 'about.point.2', 'about.point.3'] as const).map(
-              (k) => (
-                <li
-                  key={k}
-                  className="py-4 border-b hairline text-ink font-medium text-sm md:text-base"
-                >
-                  {t(k)}
-                </li>
-              )
-            )}
+            {(
+              [
+                ['about.point.1', 'instructor'],
+                ['about.point.2', 'women-community'],
+                ['about.point.3', 'retreats'],
+              ] as const
+            ).map(([k, icon]) => (
+              <li
+                key={k}
+                className="flex items-center gap-4 py-4 border-b hairline text-ink font-medium text-sm md:text-base"
+              >
+                <BrandIcon name={icon} className="w-8 h-8" />
+                {t(k)}
+              </li>
+            ))}
           </ul>
         </Reveal>
       </div>

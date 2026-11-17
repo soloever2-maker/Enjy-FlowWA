@@ -6,6 +6,7 @@ import { Star } from 'lucide-react'
 import { useLang } from '@/lib/lang-context'
 import { supabase } from '@/lib/supabase'
 import Reveal from './Reveal'
+import BrandIcon from './BrandIcon'
 
 type Review = {
   id: string
@@ -41,7 +42,10 @@ export default function Reviews() {
         <Reveal>
           <div className="flex items-center gap-5 mb-6 text-ink-muted">
             <span className="eyebrow">{t('reviews.label')}</span>
-            <span className="h-px flex-1 bg-ink/10" aria-hidden />
+            <span className="text-sage">
+              <BrandIcon name="dots" mode="mask" className="w-14 h-2.5" />
+            </span>
+            <span className="flex-1" aria-hidden />
             {avg && (
               <span className="flex items-center gap-2 eyebrow text-ink">
                 <Star className="w-3.5 h-3.5 fill-terracotta text-terracotta" />

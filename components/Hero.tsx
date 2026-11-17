@@ -5,6 +5,10 @@ import Image from 'next/image'
 import { useLang } from '@/lib/lang-context'
 import { STATS } from '@/lib/site-config'
 import FloatingBotanicals from './FloatingBotanicals'
+import BrandIcon, { type BrandIconName } from './BrandIcon'
+
+// Years of experience, happy members, class styles
+const STAT_ICONS: BrandIconName[] = ['balance', 'women-community', 'yoga']
 
 export default function Hero() {
   const { lang, t } = useLang()
@@ -15,13 +19,13 @@ export default function Hero() {
       <div className="relative w-full aspect-[16/9] md:aspect-[21/9] overflow-hidden bg-ink/5">
         <Image
           src="/hero-beach.jpg"
-          alt="Yoga on the beach"
+          alt="Woman stretching in a sunlit yoga studio"
           fill
           priority
           quality={90}
           sizes="100vw"
           className="object-cover"
-          style={{ objectPosition: 'center 40%' }}
+          style={{ objectPosition: 'center 30%' }}
         />
 
         {/* Bottom fade into cream */}
@@ -93,8 +97,9 @@ export default function Hero() {
 
         {/* Stats */}
         <div className="mt-12 md:mt-16 flex flex-wrap items-end justify-center gap-x-10 md:gap-x-14 gap-y-4 border-t hairline pt-8 pb-6">
-          {STATS.map((s) => (
-            <div key={s.en} className="flex items-baseline gap-2 md:gap-3">
+          {STATS.map((s, i) => (
+            <div key={s.en} className="flex items-center gap-2 md:gap-3">
+              <BrandIcon name={STAT_ICONS[i] ?? 'balance'} className="w-7 h-7 md:w-9 md:h-9" />
               <span className="font-display font-bold text-2xl md:text-4xl text-ink">
                 {s.value}
               </span>

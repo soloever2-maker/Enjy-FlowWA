@@ -1,5 +1,7 @@
 'use client'
 
+import BrandIcon from './BrandIcon'
+
 // Minimal section heading: hairline rule + thin uppercase label,
 // then a large serif title. No decorations.
 export default function SectionHeading({
@@ -21,10 +23,9 @@ export default function SectionHeading({
         }`}
       >
         <span className="eyebrow">{label}</span>
-        <span
-          className={`h-px flex-1 ${light ? 'bg-cream/15' : 'bg-ink/10'}`}
-          aria-hidden
-        />
+        <span className={light ? 'text-cream/40' : 'text-sage'}>
+          <BrandIcon name="dots" mode="mask" className="w-14 h-2.5" />
+        </span>
       </div>
       <h2
         className={`font-display text-4xl md:text-6xl leading-[1.08] font-bold max-w-3xl ${

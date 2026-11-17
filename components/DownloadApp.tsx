@@ -1,23 +1,17 @@
 'use client'
 
-import {
-  CalendarCheck,
-  Package,
-  BellRing,
-  QrCode,
-  Apple,
-  Play,
-} from 'lucide-react'
+import { Apple, Play } from 'lucide-react'
+import BrandIcon, { type BrandIconName } from './BrandIcon'
 import { useLang } from '@/lib/lang-context'
 import { APP_STORE_URL, PLAY_STORE_URL, APP_WEB_URL } from '@/lib/site-config'
 import Reveal from './Reveal'
 
 const FEATURES = [
-  { icon: CalendarCheck, key: 'app.f1' },
-  { icon: Package, key: 'app.f2' },
-  { icon: BellRing, key: 'app.f3' },
-  { icon: QrCode, key: 'app.f4' },
-] as const
+  { icon: 'booking', key: 'app.f1' },
+  { icon: 'remaining-sessions', key: 'app.f2' },
+  { icon: 'notifications', key: 'app.f3' },
+  { icon: 'qr-code', key: 'app.f4' },
+] as const satisfies readonly { icon: BrandIconName; key: string }[]
 
 // Store badge with Soon logic: empty URL → dimmed + label swap
 function StoreBadge({
@@ -69,7 +63,9 @@ export default function DownloadApp() {
         <Reveal>
           <div className="flex items-center gap-5 mb-6 text-cream/50">
             <span className="eyebrow">{t('app.label')}</span>
-            <span className="h-px flex-1 bg-cream/15" aria-hidden />
+            <span className="text-cream/40">
+              <BrandIcon name="dots" mode="mask" className="w-14 h-2.5" />
+            </span>
           </div>
           <h2 className="font-display text-4xl md:text-6xl leading-[1.08] font-bold text-cream max-w-3xl">
             {t('app.title.1')} <em className="italic">{t('app.title.2')}</em>
@@ -87,7 +83,7 @@ export default function DownloadApp() {
                 key={f.key}
                 className="flex items-center gap-5 py-5 border-b border-cream/15 text-cream/90"
               >
-                <f.icon className="w-5 h-5 text-sage shrink-0" />
+                <span className="text-sage"><BrandIcon name={f.icon} mode="mask" className="w-7 h-7" /></span>
                 <span className="text-base md:text-lg font-medium">{t(f.key)}</span>
               </li>
             ))}

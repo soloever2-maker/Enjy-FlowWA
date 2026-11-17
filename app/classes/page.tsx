@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import SiteShell from '@/components/SiteShell'
 import Classes from '@/components/Classes'
 import SchedulePreview from '@/components/SchedulePreview'
+import WaveDivider from '@/components/WaveDivider'
 
 export const metadata: Metadata = {
   title: 'Classes — Align with Enjy',
@@ -13,6 +14,7 @@ export default function ClassesPage() {
   return (
     <SiteShell>
       <Classes />
+      <WaveDivider />
       <SchedulePreview />
     </SiteShell>
   )
