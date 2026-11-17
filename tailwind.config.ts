@@ -1,27 +1,30 @@
 import type { Config } from 'tailwindcss'
 
-// Brand palette sampled directly from the official logo file
+// Brand palette: the logo's colours (terracotta, sage dots, slate) plus the
+// identity system's Deep Sage, Warm Ivory and Charcoal for text and buttons.
 const config: Config = {
   content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
   theme: {
     extend: {
       colors: {
-        cream: '#F5F1E6',
+        cream: '#F4EFE5',
         'cream-deep': '#ECE5D3',
+        // Logo terracotta: logo, large headings, icons. For small text use terracotta-deep (passes 4.5:1 on cream).
         terracotta: '#C05A2F',
         'terracotta-deep': '#A84A22',
         sage: '#8FA98F',
-        'sage-soft': '#E4EAE2',
-        'sage-deep': '#41533F',
+        'sage-soft': '#E4E9DD',
+        'sage-mid': '#4A6356',
+        'sage-deep': '#35483E',
         slate: '#5B7F8A',
-        ink: '#2B2B26',
-        'ink-muted': '#6E685C',
+        ink: '#35332F',
+        'ink-muted': '#5F5C55',
       },
       fontFamily: {
-        display: ['var(--font-playfair)', 'var(--font-cairo)', 'serif'],
-        body: ['var(--font-dmsans)', 'var(--font-cairo)', 'sans-serif'],
+        display: ['var(--font-playfair)', 'var(--font-messiri)', 'serif'],
+        body: ['var(--font-jost)', 'var(--font-plex-arabic)', 'sans-serif'],
       },
-      borderRadius: { arch: '999px 999px 28px 28px' },
+      borderRadius: { arch: '999px 999px 28px 28px', card: '16px', frame: '28px' },
     },
   },
   plugins: [],

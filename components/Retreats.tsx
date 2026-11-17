@@ -91,7 +91,7 @@ export default function Retreats() {
             <Reveal key={r.id} delay={i * 90}>
               <article className="group">
                 <a href="/#app" className="block">
-                  <div className="relative aspect-[4/3] overflow-hidden mb-6">
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-card mb-6">
                     <Image
                       src={r.cover_image || '/retreat-aswan.jpg'}
                       alt={r.title}
@@ -100,7 +100,7 @@ export default function Retreats() {
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
                   </div>
-                  <p className="eyebrow text-terracotta mb-3">
+                  <p className="eyebrow text-terracotta-deep mb-3">
                     {r.location} · {fmtDate(r.date, r.end_date)}
                   </p>
                   <h3 className="font-display font-bold text-2xl md:text-3xl text-ink mb-3 transition-colors group-hover:text-terracotta">
@@ -122,7 +122,7 @@ export default function Retreats() {
                     ) : (
                       <span />
                     )}
-                    <span className="eyebrow text-ink-muted group-hover:text-terracotta transition-colors">
+                    <span className="eyebrow text-ink-muted group-hover:text-terracotta-deep transition-colors">
                       {t('retreats.details')}
                     </span>
                   </div>

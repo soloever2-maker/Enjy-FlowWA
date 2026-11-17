@@ -36,9 +36,9 @@ function StoreBadge({
   const live = href.trim().length > 0
   const inner = (
     <span
-      className={`inline-flex items-center gap-3.5 border px-6 py-3.5 min-w-[200px] transition-all ${
+      className={`inline-flex items-center gap-3.5 border rounded-full px-6 py-3.5 min-w-[200px] transition-all ${
         live
-          ? 'bg-cream text-ink border-cream hover:bg-terracotta hover:text-cream hover:border-terracotta'
+          ? 'bg-cream text-sage-deep border-cream hover:bg-sage-soft hover:border-sage-soft'
           : 'bg-transparent text-cream/50 border-cream/25'
       }`}
     >

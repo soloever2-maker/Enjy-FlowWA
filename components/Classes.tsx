@@ -65,7 +65,7 @@ export default function Classes() {
               >
                 <a
                   href="/#app"
-                  className="group relative block overflow-hidden bg-ink/5 aspect-[3/2]"
+                  className="group relative block overflow-hidden rounded-card bg-ink/5 aspect-[3/2]"
                 >
                   <Image
                     src={image}

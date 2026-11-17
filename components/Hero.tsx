@@ -29,7 +29,7 @@ export default function Hero() {
           className="absolute inset-x-0 bottom-0 h-20 md:h-28 z-[5]"
           style={{
             background:
-              'linear-gradient(180deg, transparent 0%, #F5F1E6 100%)',
+              'linear-gradient(180deg, transparent 0%, #F4EFE5 100%)',
           }}
           aria-hidden
         />
@@ -79,13 +79,13 @@ export default function Hero() {
         <div className="mt-8 md:mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
             href="/#app"
-            className="eyebrow bg-ink text-cream px-9 py-4 hover:bg-terracotta transition-colors w-full sm:w-auto text-center"
+            className="btn-primary eyebrow px-9 py-4 w-full sm:w-auto text-center"
           >
             {t('hero.cta.primary')}
           </a>
           <a
             href="/classes"
-            className="eyebrow text-ink border-b border-ink/30 pb-1.5 hover:text-terracotta hover:border-terracotta transition-colors"
+            className="eyebrow text-ink border-b border-ink/30 pb-1.5 hover:text-terracotta-deep hover:border-terracotta-deep transition-colors"
           >
             {t('hero.cta.secondary')}
           </a>

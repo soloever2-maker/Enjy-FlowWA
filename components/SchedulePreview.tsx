@@ -72,7 +72,7 @@ export default function SchedulePreview() {
               href={`${APP_WEB_URL}/schedule`}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2.5 eyebrow text-terracotta border-b border-terracotta/40 pb-2 hover:border-terracotta transition-colors"
+              className="group inline-flex items-center gap-2.5 eyebrow text-terracotta-deep border-b border-terracotta-deep/40 pb-2 hover:border-terracotta-deep transition-colors"
             >
               {t('schedule.cta')}
               <ArrowUpRight className="w-4 h-4 rtl:-scale-x-100 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

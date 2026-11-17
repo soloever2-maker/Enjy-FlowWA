@@ -42,7 +42,7 @@ function StoreButton({
       target="_blank"
       rel="noopener noreferrer"
       onClick={onClick}
-      className="flex-1 inline-flex items-center justify-center gap-3 bg-ink text-cream px-5 py-3.5 hover:bg-terracotta transition-colors"
+      className="flex-1 btn-primary gap-3 px-5 py-3.5"
     >
       <Icon className="w-6 h-6 shrink-0" />
       <span className="text-start leading-tight">
@@ -109,13 +109,13 @@ export default function AppPopup() {
       />
 
       {/* Card */}
-      <div className="relative w-full max-w-md bg-cream shadow-2xl px-7 pt-12 pb-8 md:px-10 md:pt-14 md:pb-10 text-center animate-menuSlideUp">
+      <div className="relative w-full max-w-md bg-cream rounded-frame shadow-2xl px-7 pt-12 pb-8 md:px-10 md:pt-14 md:pb-10 text-center animate-menuSlideUp">
         <button
           ref={closeRef}
           type="button"
           onClick={dismiss}
           aria-label="Close"
-          className="absolute top-3 end-3 p-2 text-ink-muted hover:text-terracotta transition-colors"
+          className="absolute top-3 end-3 p-2 text-ink-muted hover:text-terracotta-deep transition-colors"
         >
           <X className="w-6 h-6" />
         </button>
@@ -128,7 +128,7 @@ export default function AppPopup() {
           className="mx-auto h-24 w-auto object-contain"
         />
 
-        <p className="eyebrow text-terracotta mt-6">{t('app.label')}</p>
+        <p className="eyebrow text-terracotta-deep mt-6">{t('app.label')}</p>
         <h2
           id="app-popup-title"
           className="mt-3 font-display text-3xl md:text-4xl font-bold leading-tight text-ink"
@@ -159,7 +159,7 @@ export default function AppPopup() {
         <button
           type="button"
           onClick={dismiss}
-          className="mt-6 eyebrow text-ink-muted border-b border-ink/20 pb-1.5 hover:text-terracotta hover:border-terracotta transition-colors"
+          className="mt-6 eyebrow text-ink-muted border-b border-ink/20 pb-1.5 hover:text-terracotta-deep hover:border-terracotta-deep transition-colors"
         >
           {t('popup.continue')}
         </button>

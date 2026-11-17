@@ -37,7 +37,7 @@ export default function FAQ() {
                     className="w-full flex items-center justify-between gap-4 py-6 md:py-7 text-left rtl:text-right group"
                     aria-expanded={isOpen}
                   >
-                    <h3 className="font-display font-bold text-base md:text-lg text-ink group-hover:text-terracotta transition-colors leading-snug">
+                    <h3 className="font-display font-bold text-base md:text-lg text-ink group-hover:text-terracotta-deep transition-colors leading-snug">
                       {lang === 'ar' ? item.q.ar : item.q.en}
                     </h3>
                     <ChevronDown
@@ -71,7 +71,7 @@ export default function FAQ() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 eyebrow text-terracotta hover:text-terracotta-deep transition-colors"
+              className="inline-flex items-center gap-2 eyebrow text-terracotta-deep hover:text-sage-deep transition-colors"
             >
               {t('faq.more')}
               <svg

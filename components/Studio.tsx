@@ -45,7 +45,7 @@ export default function Studio() {
           {SPACES.map((space, i) => (
             <Reveal key={space.src} delay={i * 120} className={space.col}>
               <figure
-                className={`group relative overflow-hidden bg-ink/5 ${space.mobileAspect} md:aspect-auto md:h-[540px] lg:h-[600px]`}
+                className={`group relative overflow-hidden rounded-frame bg-ink/5 ${space.mobileAspect} md:aspect-auto md:h-[540px] lg:h-[600px]`}
               >
                 <Image
                   src={space.src}

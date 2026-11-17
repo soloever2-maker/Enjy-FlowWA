@@ -100,8 +100,8 @@ export default function Navbar() {
                 <Link
                   href={l.href}
                   aria-current={pathname === l.href ? 'page' : undefined}
-                  className={`eyebrow hover:text-terracotta transition-colors ${
-                    pathname === l.href ? 'text-terracotta' : 'text-ink-muted'
+                  className={`eyebrow hover:text-terracotta-deep transition-colors ${
+                    pathname === l.href ? 'text-terracotta-deep' : 'text-ink-muted'
                   }`}
                 >
                   {t(l.key)}
@@ -114,7 +114,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}
-              className="eyebrow px-2 py-1 text-ink-muted hover:text-terracotta transition-colors"
+              className="eyebrow px-2 py-1 text-ink-muted hover:text-terracotta-deep transition-colors"
               aria-label="Switch language"
             >
               {lang === 'ar' ? 'EN' : 'ع'}
@@ -122,7 +122,7 @@ export default function Navbar() {
 
             <Link
               href="/#app"
-              className="hidden lg:inline-flex eyebrow px-6 py-2.5 bg-ink text-cream hover:bg-terracotta transition-colors"
+              className="hidden lg:inline-flex btn-primary eyebrow px-6 py-2.5"
             >
               {t('nav.cta')}
             </Link>
@@ -206,7 +206,7 @@ export default function Navbar() {
               <Link
                 href="/#app"
                 onClick={close}
-                className="block text-center eyebrow bg-ink text-cream py-4 hover:bg-terracotta transition-colors"
+                className="btn-primary w-full eyebrow py-4"
               >
                 {t('nav.cta')}
               </Link>
@@ -216,7 +216,7 @@ export default function Navbar() {
                   href={INSTAGRAM_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-ink-muted hover:text-terracotta transition-colors"
+                  className="flex items-center gap-2 text-ink-muted hover:text-terracotta-deep transition-colors"
                   aria-label="Instagram"
                 >
                   <Instagram className="w-5 h-5" />
@@ -229,7 +229,7 @@ export default function Navbar() {
                   href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-ink-muted hover:text-terracotta transition-colors"
+                  className="flex items-center gap-2 text-ink-muted hover:text-terracotta-deep transition-colors"
                   aria-label="WhatsApp"
                 >
                   <MessageCircle className="w-5 h-5" />
@@ -240,7 +240,7 @@ export default function Navbar() {
 
                 <button
                   onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}
-                  className="eyebrow text-ink-muted hover:text-terracotta transition-colors px-1"
+                  className="eyebrow text-ink-muted hover:text-terracotta-deep transition-colors px-1"
                   aria-label="Switch language"
                 >
                   {lang === 'ar' ? 'EN' : 'عربي'}

@@ -61,7 +61,7 @@ export default function Reviews() {
               delay={i * 60}
               className="shrink-0 w-[86%] sm:w-[440px]"
             >
-              <figure className="bg-cream p-9 md:p-11 h-full flex flex-col me-5">
+              <figure className="bg-cream rounded-card p-9 md:p-11 h-full flex flex-col me-5">
                 <blockquote className="font-display italic text-xl md:text-2xl text-ink leading-relaxed flex-1">
                   &ldquo;{r.comment}&rdquo;
                 </blockquote>

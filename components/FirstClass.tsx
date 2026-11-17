@@ -56,7 +56,7 @@ export default function FirstClass() {
           <div className="mt-16 pt-10 border-t border-cream/10 flex flex-wrap items-center gap-6">
             <a
               href="/#app"
-              className="eyebrow bg-cream text-ink px-9 py-4 hover:bg-terracotta hover:text-cream transition-colors"
+              className="btn-light eyebrow px-9 py-4"
             >
               {t('hero.cta.primary')}
             </a>

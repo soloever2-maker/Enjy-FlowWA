@@ -8,7 +8,7 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: #F5F1E6;
+  background-color: #F4EFE5;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -27,7 +27,7 @@ body {
 }
 
 .hairline {
-  border-color: rgba(43, 43, 38, 0.12);
+  border-color: rgba(53, 51, 47, 0.12);
 }
 
 .snap-rail {
@@ -40,8 +40,20 @@ body {
 
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid #c05a2f;
+  outline: 2px solid #35483e;
   outline-offset: 3px;
+}
+
+/* ── Buttons (identity: pills, Deep Sage primary) ────────────── */
+@layer components {
+  /* Main action on cream: Deep Sage fill, cream text (8.5:1). */
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-full bg-sage-deep text-cream transition-colors hover:bg-sage-mid active:bg-[#2A3A31];
+  }
+  /* Main action on a dark (Deep Sage / photo) section: cream fill, Deep Sage text. */
+  .btn-light {
+    @apply inline-flex items-center justify-center rounded-full bg-cream text-sage-deep transition-colors hover:bg-sage-soft;
+  }
 }
 
 /* ── Hero Ken Burns slideshow ────────────────────────────────── */

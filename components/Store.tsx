@@ -35,7 +35,7 @@ export default function Store() {
                 <h3 className="font-display font-bold text-2xl md:text-3xl text-ink/45">
                   {lang === 'ar' ? p.ar : p.en}
                 </h3>
-                <span className="eyebrow text-terracotta shrink-0">
+                <span className="eyebrow text-terracotta-deep shrink-0">
                   {t('store.soon')}
                 </span>
               </div>
@@ -48,7 +48,7 @@ export default function Store() {
             href={notifyHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-12 inline-flex eyebrow bg-ink text-cream px-9 py-4 hover:bg-terracotta transition-colors"
+            className="mt-12 btn-primary eyebrow px-9 py-4"
           >
             {t('store.notify')}
           </a>

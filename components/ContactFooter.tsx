@@ -50,7 +50,7 @@ export function Contact() {
                 href={c.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group block border hairline p-9 transition-colors hover:bg-ink hover:border-ink h-full"
+                className="group block border hairline rounded-card p-9 transition-colors hover:bg-sage-deep hover:border-sage-deep h-full"
               >
                 <c.icon className="w-6 h-6 text-terracotta mb-6" />
                 <h3 className="font-display font-bold text-xl text-ink mb-2 transition-colors group-hover:text-cream">
@@ -92,7 +92,7 @@ export function Footer() {
             href={PRIVACY_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-terracotta transition-colors underline underline-offset-4"
+            className="hover:text-terracotta-deep transition-colors underline underline-offset-4"
           >
             {t('footer.privacy')}
           </a>

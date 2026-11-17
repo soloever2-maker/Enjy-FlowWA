@@ -18,7 +18,7 @@ export default function About() {
         {/* Portrait */}
         <Reveal>
           {ENJY_PHOTO ? (
-            <div className="relative aspect-[3/4] md:aspect-[4/5] overflow-hidden">
+            <div className="relative aspect-[3/4] md:aspect-[4/5] overflow-hidden rounded-arch">
               <Image
                 src={ENJY_PHOTO}
                 alt="Enjy Gebril"
@@ -28,7 +28,7 @@ export default function About() {
               />
             </div>
           ) : (
-            <div className="aspect-[4/5] bg-sage-deep flex items-center justify-center p-10">
+            <div className="aspect-[4/5] rounded-arch bg-sage-deep flex items-center justify-center p-10">
               <p className="font-display font-bold text-cream lowercase text-4xl md:text-5xl leading-tight text-center">
                 align
                 <br />
