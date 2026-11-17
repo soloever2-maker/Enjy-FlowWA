@@ -103,7 +103,7 @@ export default function Retreats() {
                   <p className="eyebrow text-terracotta-deep mb-3">
                     {r.location} · {fmtDate(r.date, r.end_date)}
                   </p>
-                  <h3 className="font-display font-bold text-2xl md:text-3xl text-ink mb-3 transition-colors group-hover:text-terracotta">
+                  <h3 className="font-display font-bold text-2xl md:text-3xl text-ink mb-3 transition-colors group-hover:text-terracotta-deep">
                     {r.title}
                   </h3>
                   {r.description && (

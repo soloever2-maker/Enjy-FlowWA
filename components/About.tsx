@@ -16,9 +16,14 @@ export default function About() {
     <section id="about" className="py-28 md:py-36 bg-cream">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
         {/* Portrait */}
-        <Reveal>
+        <Reveal className="relative">
+          {/* Balance circle — Soft Sage disc behind the arch portrait */}
+          <div
+            className="absolute z-0 rounded-full bg-sage/60 w-[70%] aspect-square -bottom-8 -end-8 md:-end-12"
+            aria-hidden
+          />
           {ENJY_PHOTO ? (
-            <div className="relative aspect-[3/4] md:aspect-[4/5] overflow-hidden rounded-arch">
+            <div className="relative z-10 aspect-[3/4] md:aspect-[4/5] overflow-hidden rounded-arch">
               <Image
                 src={ENJY_PHOTO}
                 alt="Enjy Gebril"
@@ -28,7 +33,7 @@ export default function About() {
               />
             </div>
           ) : (
-            <div className="aspect-[4/5] rounded-arch bg-sage-deep flex items-center justify-center p-10">
+            <div className="relative z-10 aspect-[4/5] rounded-arch bg-sage-deep flex items-center justify-center p-10">
               <p className="font-display font-bold text-cream lowercase text-4xl md:text-5xl leading-tight text-center">
                 align
                 <br />

@@ -52,7 +52,7 @@ export function Contact() {
                 rel="noopener noreferrer"
                 className="group block border hairline rounded-card p-9 transition-colors hover:bg-sage-deep hover:border-sage-deep h-full"
               >
-                <c.icon className="w-6 h-6 text-terracotta mb-6" />
+                <c.icon className="w-6 h-6 text-sage-deep group-hover:text-sage mb-6 transition-colors" />
                 <h3 className="font-display font-bold text-xl text-ink mb-2 transition-colors group-hover:text-cream">
                   {t(c.titleKey)}
                 </h3>
@@ -75,7 +75,7 @@ export function Footer() {
       <div className="max-w-6xl mx-auto px-5">
         {/* Oversized wordmark spanning the width */}
         <p
-          className="font-display font-bold text-terracotta lowercase leading-none text-[clamp(2.6rem,9vw,6.5rem)] tracking-tight text-center select-none"
+          className="font-display font-bold text-logo-terracotta lowercase leading-none text-[clamp(2.6rem,9vw,6.5rem)] tracking-tight text-center select-none"
           aria-hidden
         >
           align with enjy

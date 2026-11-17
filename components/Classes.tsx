@@ -80,19 +80,19 @@ export default function Classes() {
                     className="absolute inset-0 transition-opacity duration-500"
                     style={{
                       background:
-                        'linear-gradient(180deg, rgba(43,43,38,0) 30%, rgba(43,43,38,0.12) 55%, rgba(43,43,38,0.72) 100%)',
+                        'linear-gradient(180deg, rgba(53,72,62,0) 30%, rgba(53,72,62,0.14) 55%, rgba(53,72,62,0.78) 100%)',
                     }}
                     aria-hidden
                   />
-                  <div className="absolute inset-0 bg-terracotta/0 group-hover:bg-terracotta/10 transition-colors duration-500" aria-hidden />
+                  <div className="absolute inset-0 bg-sage-deep/0 group-hover:bg-sage-deep/10 transition-colors duration-500" aria-hidden />
 
                   {/* Top badges — duration + level */}
                   <div className="absolute top-4 left-4 rtl:left-auto rtl:right-4 flex items-center gap-2">
-                    <span className="inline-flex items-center gap-1.5 bg-ink/50 backdrop-blur-sm text-cream text-xs font-medium px-3 py-1.5 rounded-full">
+                    <span className="inline-flex items-center gap-1.5 bg-sage-deep/85 backdrop-blur-sm text-cream text-xs font-medium px-3 py-1.5 rounded-full">
                       <Clock className="w-3 h-3" />
                       {details.duration} {lang === 'ar' ? 'د' : 'min'}
                     </span>
-                    <span className="bg-cream/85 backdrop-blur-sm text-ink text-xs font-medium px-3 py-1.5 rounded-full">
+                    <span className="bg-sage-soft/95 backdrop-blur-sm text-sage-deep text-xs font-medium px-3 py-1.5 rounded-full">
                       {lang === 'ar' ? details.level.ar : details.level.en}
                     </span>
                   </div>

@@ -25,11 +25,11 @@ function BrandLogo({ size = 'sm' }: { size?: 'sm' | 'md' }) {
   const text = size === 'sm' ? 'text-[0.95rem]' : 'text-lg'
   return (
     <span className={`font-display italic ${text} leading-none tracking-tight select-none inline-flex items-center gap-[5px]`}>
-      <span className="text-terracotta">align</span>
-      <span className="text-sage w-[5px] h-[5px] rounded-full bg-sage inline-block flex-shrink-0" />
+      <span className="text-logo-terracotta">align</span>
+      <span className="w-[5px] h-[5px] rounded-full bg-logo-sage inline-block flex-shrink-0" />
       <span className="text-sage-deep">with</span>
-      <span className="text-sage w-[5px] h-[5px] rounded-full bg-sage inline-block flex-shrink-0" />
-      <span className="text-terracotta">enjy</span>
+      <span className="w-[5px] h-[5px] rounded-full bg-logo-sage inline-block flex-shrink-0" />
+      <span className="text-logo-terracotta">enjy</span>
     </span>
   )
 }
@@ -162,7 +162,7 @@ export default function Navbar() {
               </Link>
               <button
                 onClick={close}
-                className="p-1.5 text-ink hover:text-terracotta transition-colors"
+                className="p-1.5 text-ink hover:text-terracotta-deep transition-colors"
                 aria-label="Close menu"
               >
                 <X className="w-6 h-6" />
@@ -186,8 +186,8 @@ export default function Navbar() {
                     >
                       <span className="hidden sm:block w-0 group-hover:w-10 h-px bg-terracotta transition-all duration-300 me-0 group-hover:me-4" />
                       <span
-                        className={`font-display text-3xl sm:text-4xl font-bold group-hover:text-terracotta transition-colors duration-300 ${
-                          pathname === l.href ? 'text-terracotta' : 'text-ink'
+                        className={`font-display text-3xl sm:text-4xl font-bold group-hover:text-terracotta-deep transition-colors duration-300 ${
+                          pathname === l.href ? 'text-terracotta-deep' : 'text-ink'
                         }`}
                       >
                         {t(l.key)}

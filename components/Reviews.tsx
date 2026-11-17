@@ -36,7 +36,7 @@ export default function Reviews() {
       : null
 
   return (
-    <section id="reviews" className="py-28 md:py-36 bg-cream-deep">
+    <section id="reviews" className="py-28 md:py-36 bg-sage-soft">
       <div className="max-w-7xl mx-auto px-6">
         <Reveal>
           <div className="flex items-center gap-5 mb-6 text-ink-muted">

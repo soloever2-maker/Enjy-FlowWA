@@ -44,6 +44,9 @@ button:focus-visible {
   outline-offset: 3px;
 }
 
+/* ── Icons: thin line icons, one stroke weight site-wide ─────── */
+svg.lucide { stroke-width: 1.5; }
+
 /* ── Buttons (identity: pills, Deep Sage primary) ────────────── */
 @layer components {
   /* Main action on cream: Deep Sage fill, cream text (8.5:1). */

@@ -61,7 +61,7 @@ export default function Hero() {
         <h1 className="font-display text-ink font-bold leading-[1.08] text-3xl md:text-5xl lg:text-6xl">
           {t('hero.title.1')}{' '}
           <em
-            className={`text-terracotta ${
+            className={`text-terracotta-deep ${
               lang === 'en' ? 'italic' : 'not-italic'
             }`}
           >

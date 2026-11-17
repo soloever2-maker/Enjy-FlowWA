@@ -67,9 +67,9 @@ const Bubble = ({ color }: { color: string }) => (
 
 /* ── Colors ───────────────────────────────────────────────────── */
 
-const SAGE = '#8FA98F'
-const SAGE_SOFT = '#A8C3A8'
-const TERRA = '#C8907A'
+const SAGE = '#A8B59A'
+const SAGE_SOFT = '#C3CDB8'
+const TERRA = '#C58F79'
 
 /* ── Element definitions ─────────────────────────────────────── */
 

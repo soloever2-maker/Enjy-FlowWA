@@ -1,7 +1,7 @@
 import type { Config } from 'tailwindcss'
 
-// Brand palette: the logo's colours (terracotta, sage dots, slate) plus the
-// identity system's Deep Sage, Warm Ivory and Charcoal for text and buttons.
+// Brand identity palette (Align with Enjy brand book). The logo keeps its own
+// colours (logo-terracotta, logo-sage, slate) — use those only for the logo and wordmark.
 const config: Config = {
   content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
   theme: {
@@ -9,14 +9,18 @@ const config: Config = {
       colors: {
         cream: '#F4EFE5',
         'cream-deep': '#ECE5D3',
-        // Logo terracotta: logo, large headings, icons. For small text use terracotta-deep (passes 4.5:1 on cream).
-        terracotta: '#C05A2F',
-        'terracotta-deep': '#A84A22',
-        sage: '#8FA98F',
+        // Dusty Terracotta: accent fills only (badges, highlights, stars). Too light for text on cream.
+        terracotta: '#C58F79',
+        'terracotta-soft': '#F1E0D7',
+        // Terracotta for text and links (5.1:1 on cream).
+        'terracotta-deep': '#8F5641',
+        sage: '#A8B59A',
         'sage-soft': '#E4E9DD',
         'sage-mid': '#4A6356',
         'sage-deep': '#35483E',
         slate: '#5B7F8A',
+        'logo-terracotta': '#C05A2F',
+        'logo-sage': '#8FA98F',
         ink: '#35332F',
         'ink-muted': '#5F5C55',
       },
