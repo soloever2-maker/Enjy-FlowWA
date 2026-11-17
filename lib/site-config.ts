@@ -59,19 +59,26 @@ export const CLASS_IMAGES: Record<string, string> = {
   'Gentle Yoga & Recovery': '/classes/gentle-yoga.jpg',
   'Belly Rhythmic Dancing': '/classes/outdoor-meditation.jpg',
   'Aqua Aerobics':          '/classes/aqua-aerobics.jpg',
-  // Live class names from the app (Supabase class_types)
-  'Power Mat Pilates':      '/classes/mat-pilates.jpg',
-  'Gentle Yoga & mobility': '/classes/gentle-yoga.jpg',
   'Toning and circuit':     '/classes/toning-circuit.jpg',
   'Toning and cardio':      '/classes/toning-cardio.jpg',
 }
 
-// Looks a class up by name, ignoring letter case and extra spaces.
+// The app shows some classes under a newer name. Same class, same photo,
+// description, duration and level as the name it points to.
+export const CLASS_ALIASES: Record<string, string> = {
+  'Power Mat Pilates': 'Mat Pilates',
+  'Gentle Yoga & mobility': 'Gentle Yoga & Recovery',
+}
+
+// Looks a class up by name (or its alias), ignoring letter case and extra spaces.
 export function byClassName<T>(map: Record<string, T>, name: string): T | undefined {
   const key = (s: string) => s.trim().toLowerCase().replace(/\s+/g, ' ')
-  const wanted = key(name)
-  const hit = Object.keys(map).find((k) => key(k) === wanted)
-  return hit ? map[hit] : undefined
+  const find = (n: string) => {
+    const hit = Object.keys(map).find((k) => key(k) === key(n))
+    return hit ? map[hit] : undefined
+  }
+  const alias = Object.keys(CLASS_ALIASES).find((k) => key(k) === key(name))
+  return find(name) ?? (alias ? find(CLASS_ALIASES[alias]) : undefined)
 }
 export const CLASS_HERO_IMAGE = '/classes/chair-yoga.jpg'
 export const FALLBACK_CLASS_IMAGE = '/classes/gentle-yoga.jpg'
