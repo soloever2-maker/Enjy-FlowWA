@@ -127,17 +127,39 @@ const ELEMENTS: FloralEl[] = [
     anim: 'botanicalFloat1 18s ease-in-out 1s infinite alternate' },
   { Shape: Bubble, color: TERRA, top: '52%', right: '28%', size: 12, opacity: 0.18,
     anim: 'botanicalFloat2 22s ease-in-out 3s infinite alternate' },
+  // ── Extra layer — fills the middle and lower half of tall sections
+  { Shape: Daisy, color: SAGE, top: '58%', left: '2%', size: 46, opacity: 0.3,
+    anim: 'botanicalFloat2 30s ease-in-out 2s infinite alternate' },
+  { Shape: Flower5, color: SAGE_SOFT, top: '26%', right: '18%', size: 26, opacity: 0.28,
+    anim: 'botanicalFloat1 27s ease-in-out 6s infinite alternate' },
+  { Shape: Daisy, color: TERRA, bottom: '4%', right: '3%', size: 50, opacity: 0.24,
+    anim: 'botanicalFloat3 34s ease-in-out 1s infinite alternate' },
+  { Shape: CirclePair, color: SAGE, top: '70%', left: '28%', size: 24, opacity: 0.22,
+    anim: 'botanicalFloat1 25s ease-in-out 3s infinite alternate' },
+  { Shape: Crescent, color: TERRA, top: '64%', right: '14%', size: 22, opacity: 0.24,
+    anim: 'botanicalFloat2 23s ease-in-out 5s infinite alternate' },
+  { Shape: Flower5, color: SAGE, bottom: '22%', left: '40%', size: 22, opacity: 0.2,
+    anim: 'botanicalFloat3 29s ease-in-out 2s infinite alternate' },
+  { Shape: Bubble, color: SAGE_SOFT, top: '80%', right: '40%', size: 14, opacity: 0.24,
+    anim: 'botanicalFloat1 21s ease-in-out 4s infinite alternate' },
+  { Shape: Bubble, color: TERRA, top: '36%', left: '16%', size: 12, opacity: 0.2,
+    anim: 'botanicalFloat3 19s ease-in-out 6s infinite alternate' },
 ]
 
 /* ── Component ───────────────────────────────────────────────── */
 
+const IVORY = '#F4EFE5'
+
 // mirror: flips the layout so sections next to each other don't look identical.
+// tone="light": draws every shape in ivory, for the Deep Sage sections.
 export default function FloatingBotanicals({
   className = '',
   mirror = false,
+  tone = 'default',
 }: {
   className?: string
   mirror?: boolean
+  tone?: 'default' | 'light'
 }) {
   return (
     <div
@@ -160,7 +182,7 @@ export default function FloatingBotanicals({
 
         return (
           <div key={i} style={style}>
-            <el.Shape color={el.color} />
+            <el.Shape color={tone === 'light' ? IVORY : el.color} />
           </div>
         )
       })}

@@ -5,6 +5,7 @@
 import { useLang } from '@/lib/lang-context'
 import SectionHeading from './SectionHeading'
 import Reveal from './Reveal'
+import FloatingBotanicals from './FloatingBotanicals'
 
 const STEPS = [
   { num: '01', title: 'first.step1.title', desc: 'first.step1.desc' },
@@ -16,8 +17,9 @@ export default function FirstClass() {
   const { t } = useLang()
 
   return (
-    <section className="py-28 md:py-36 bg-sage-deep text-cream">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="relative overflow-hidden py-16 md:py-24 bg-sage-deep text-cream">
+      <FloatingBotanicals tone="light" />
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
         <Reveal>
           <SectionHeading
             label={t('first.label')}
@@ -53,7 +55,7 @@ export default function FirstClass() {
 
         {/* CTA */}
         <Reveal delay={400}>
-          <div className="mt-16 pt-10 border-t border-cream/10 flex flex-wrap items-center gap-6">
+          <div className="mt-10 md:mt-14 pt-8 border-t border-cream/10 flex flex-wrap items-center gap-6">
             <a
               href="/#app"
               className="btn-light eyebrow px-9 py-4"

@@ -5,6 +5,7 @@ import BrandIcon, { type BrandIconName } from './BrandIcon'
 import { useLang } from '@/lib/lang-context'
 import { APP_STORE_URL, PLAY_STORE_URL, APP_WEB_URL } from '@/lib/site-config'
 import Reveal from './Reveal'
+import FloatingBotanicals from './FloatingBotanicals'
 
 const FEATURES = [
   { icon: 'booking', key: 'app.f1' },
@@ -58,8 +59,9 @@ export default function DownloadApp() {
   const { t } = useLang()
 
   return (
-    <section id="app" className="py-28 md:py-36 bg-sage-deep">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="app" className="relative overflow-hidden py-16 md:py-24 bg-sage-deep">
+      <FloatingBotanicals tone="light" mirror />
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
         <Reveal>
           <div className="flex items-center gap-5 mb-6 text-cream/50">
             <span className="eyebrow">{t('app.label')}</span>
@@ -77,7 +79,7 @@ export default function DownloadApp() {
 
         {/* Feature index rows */}
         <Reveal delay={120}>
-          <ul className="mt-14 border-t border-cream/15">
+          <ul className="mt-10 md:mt-12 border-t border-cream/15">
             {FEATURES.map((f) => (
               <li
                 key={f.key}

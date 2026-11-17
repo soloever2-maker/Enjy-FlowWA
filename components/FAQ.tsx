@@ -17,7 +17,7 @@ export default function FAQ() {
   const toggle = (i: number) => setOpen(open === i ? null : i)
 
   return (
-    <section id="faq" className="relative overflow-hidden py-28 md:py-36 bg-cream">
+    <section id="faq" className="relative overflow-hidden py-16 md:py-24 bg-cream">
       <FloatingBotanicals mirror />
       <div className="relative z-10 max-w-3xl mx-auto px-6">
         <Reveal>

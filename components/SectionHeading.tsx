@@ -16,7 +16,7 @@ export default function SectionHeading({
   light?: boolean
 }) {
   return (
-    <div className="mb-14 md:mb-20">
+    <div className="mb-8 md:mb-12">
       <div
         className={`flex items-center gap-5 mb-6 ${
           light ? 'text-cream/60' : 'text-ink-muted'

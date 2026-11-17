@@ -16,6 +16,7 @@ import {
   FALLBACK_CLASS_IMAGE,
   DEFAULT_CLASS_META,
   DEFAULT_CLASS_DETAILS,
+  byClassName,
 } from '@/lib/site-config'
 import SectionHeading from './SectionHeading'
 import Reveal from './Reveal'
@@ -38,7 +39,7 @@ export default function Classes() {
   }, [])
 
   return (
-    <section id="classes" className="relative overflow-hidden py-28 md:py-36 bg-cream">
+    <section id="classes" className="relative overflow-hidden py-16 md:py-24 bg-cream">
       <FloatingBotanicals />
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <Reveal>
@@ -51,9 +52,9 @@ export default function Classes() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
           {classes.map((c, i) => {
-            const meta = CLASS_META[c.name] ?? DEFAULT_CLASS_META
-            const image = CLASS_IMAGES[c.name] ?? FALLBACK_CLASS_IMAGE
-            const details = CLASS_DETAILS[c.name] ?? DEFAULT_CLASS_DETAILS
+            const meta = byClassName(CLASS_META, c.name) ?? DEFAULT_CLASS_META
+            const image = byClassName(CLASS_IMAGES, c.name) ?? FALLBACK_CLASS_IMAGE
+            const details = byClassName(CLASS_DETAILS, c.name) ?? DEFAULT_CLASS_DETAILS
             const isLastOdd =
               classes.length % 2 === 1 && i === classes.length - 1
 
@@ -67,47 +68,49 @@ export default function Classes() {
               >
                 <a
                   href="/#app"
-                  className="group relative block overflow-hidden rounded-card bg-ink/5 aspect-[3/2]"
+                  className="group relative block overflow-hidden rounded-card bg-cream-deep md:bg-ink/5 md:aspect-[3/2]"
                 >
-                  <Image
-                    src={image}
-                    alt={c.name}
-                    fill
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                    quality={90}
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
+                  {/* Photo — its own 3:2 box on mobile, the whole card from md up */}
+                  <div className="relative aspect-[3/2] md:absolute md:inset-0 md:aspect-auto overflow-hidden">
+                    <Image
+                      src={image}
+                      alt={c.name}
+                      fill
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                      quality={90}
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                    <div
+                      className="absolute inset-0 hidden md:block transition-opacity duration-500"
+                      style={{
+                        background:
+                          'linear-gradient(180deg, rgba(53,72,62,0) 30%, rgba(53,72,62,0.14) 55%, rgba(53,72,62,0.78) 100%)',
+                      }}
+                      aria-hidden
+                    />
+                    <div className="absolute inset-0 bg-sage-deep/0 group-hover:bg-sage-deep/10 transition-colors duration-500" aria-hidden />
 
-                  <div
-                    className="absolute inset-0 transition-opacity duration-500"
-                    style={{
-                      background:
-                        'linear-gradient(180deg, rgba(53,72,62,0) 30%, rgba(53,72,62,0.14) 55%, rgba(53,72,62,0.78) 100%)',
-                    }}
-                    aria-hidden
-                  />
-                  <div className="absolute inset-0 bg-sage-deep/0 group-hover:bg-sage-deep/10 transition-colors duration-500" aria-hidden />
-
-                  {/* Top badges — duration + level */}
-                  <div className="absolute top-4 left-4 rtl:left-auto rtl:right-4 flex items-center gap-2">
-                    <span className="inline-flex items-center gap-1.5 bg-sage-deep/85 backdrop-blur-sm text-cream text-xs font-medium px-3 py-1.5 rounded-full">
-                      <Clock className="w-3 h-3" />
-                      {details.duration} {lang === 'ar' ? 'د' : 'min'}
-                    </span>
-                    <span className="bg-sage-soft/95 backdrop-blur-sm text-sage-deep text-xs font-medium px-3 py-1.5 rounded-full">
-                      {lang === 'ar' ? details.level.ar : details.level.en}
-                    </span>
+                    {/* Top badges — duration + level */}
+                    <div className="absolute top-4 left-4 rtl:left-auto rtl:right-4 flex items-center gap-2">
+                      <span className="inline-flex items-center gap-1.5 bg-sage-deep/85 backdrop-blur-sm text-cream text-xs font-medium px-3 py-1.5 rounded-full">
+                        <Clock className="w-3 h-3" />
+                        {details.duration} {lang === 'ar' ? 'د' : 'min'}
+                      </span>
+                      <span className="bg-sage-soft/95 backdrop-blur-sm text-sage-deep text-xs font-medium px-3 py-1.5 rounded-full">
+                        {lang === 'ar' ? details.level.ar : details.level.en}
+                      </span>
+                    </div>
                   </div>
 
-                  {/* Bottom text */}
-                  <div className="absolute inset-x-0 bottom-0 p-5 md:p-7 flex flex-col gap-2">
-                    <h3 className="font-display font-bold text-xl md:text-2xl lg:text-3xl text-cream leading-tight drop-shadow-sm">
+                  {/* Text — under the photo on mobile, over its bottom from md up */}
+                  <div className="relative p-5 md:absolute md:inset-x-0 md:bottom-0 md:p-7 flex flex-col gap-2">
+                    <h3 className="font-display font-bold text-xl md:text-2xl lg:text-3xl text-ink md:text-cream leading-tight md:drop-shadow-sm">
                       {c.name}
                     </h3>
-                    <p className="text-cream/80 text-sm md:text-base leading-relaxed max-w-md drop-shadow-sm">
+                    <p className="text-ink-muted md:text-cream/80 text-sm md:text-base leading-relaxed max-w-md md:drop-shadow-sm">
                       {lang === 'ar' ? meta.ar : meta.en}
                     </p>
-                    <span className="inline-flex items-center gap-1.5 eyebrow text-cream/70 mt-1 group-hover:text-cream transition-colors">
+                    <span className="inline-flex items-center gap-1.5 eyebrow text-terracotta-deep md:text-cream/70 mt-1 md:group-hover:text-cream transition-colors">
                       {t('classes.book')}
                       <ArrowUpRight className="w-3.5 h-3.5 rtl:-scale-x-100 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </span>

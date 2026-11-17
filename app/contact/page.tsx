@@ -3,6 +3,7 @@ import SiteShell from '@/components/SiteShell'
 import { Contact } from '@/components/ContactFooter'
 import FAQ from '@/components/FAQ'
 import WaveDivider from '@/components/WaveDivider'
+import PageHero from '@/components/PageHero'
 
 export const metadata: Metadata = {
   title: 'Contact — Align with Enjy',
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <SiteShell>
+      <PageHero image="/contact-hero.jpg" titleKey="nav.contact" />
       <Contact />
       <WaveDivider />
       <FAQ />

@@ -37,7 +37,7 @@ const CARDS = [
 export function Contact() {
   const { t } = useLang()
   return (
-    <section id="contact" className="relative overflow-hidden py-28 md:py-36 bg-cream">
+    <section id="contact" className="relative overflow-hidden py-16 md:py-24 bg-cream">
       <FloatingBotanicals />
       <div className="relative z-10 max-w-6xl mx-auto px-5">
         <Reveal>

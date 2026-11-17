@@ -32,7 +32,7 @@ export default function Studio() {
   const { t } = useLang()
 
   return (
-    <section id="studio" className="relative overflow-hidden py-28 md:py-36 bg-cream-deep">
+    <section id="studio" className="relative overflow-hidden py-16 md:py-24 bg-cream-deep">
       <FloatingBotanicals mirror />
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <Reveal>

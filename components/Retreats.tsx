@@ -79,7 +79,7 @@ export default function Retreats() {
 
       <div className="relative overflow-hidden">
       <FloatingBotanicals />
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 md:py-28">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-16 md:py-24">
         {loaded && retreats.length === 0 && (
           // Quiet empty state — one hairline row, no fake data
           <Reveal>

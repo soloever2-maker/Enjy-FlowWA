@@ -15,7 +15,7 @@ export default function About() {
   const { t } = useLang()
 
   return (
-    <section id="about" className="relative overflow-hidden py-28 md:py-36 bg-cream">
+    <section id="about" className="relative overflow-hidden py-16 md:py-24 bg-cream">
       <FloatingBotanicals />
       <div className="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
         {/* Portrait */}
@@ -51,7 +51,7 @@ export default function About() {
         {/* Bio */}
         <Reveal delay={120}>
           <SectionHeading label={t('about.label')} title={t('about.title')} />
-          <div className="-mt-8 space-y-5 text-ink-muted leading-loose text-base md:text-lg">
+          <div className="-mt-2 space-y-5 text-ink-muted leading-loose text-base md:text-lg">
             <p>{t('about.bio.1')}</p>
             <p>{t('about.bio.2')}</p>
           </div>

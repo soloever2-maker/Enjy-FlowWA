@@ -38,7 +38,7 @@ export default function Reviews() {
       : null
 
   return (
-    <section id="reviews" className="relative overflow-hidden py-28 md:py-36 bg-sage-soft">
+    <section id="reviews" className="relative overflow-hidden py-16 md:py-24 bg-sage-soft">
       <FloatingBotanicals mirror />
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <Reveal>
@@ -55,7 +55,7 @@ export default function Reviews() {
               </span>
             )}
           </div>
-          <h2 className="font-display text-4xl md:text-6xl leading-[1.08] font-bold text-ink mb-14 md:mb-20">
+          <h2 className="font-display text-4xl md:text-6xl leading-[1.08] font-bold text-ink mb-8 md:mb-12">
             {t('reviews.title')}
           </h2>
         </Reveal>

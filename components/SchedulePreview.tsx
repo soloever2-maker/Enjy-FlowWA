@@ -13,7 +13,7 @@ export default function SchedulePreview() {
   const { lang, t } = useLang()
 
   return (
-    <section id="schedule" className="relative overflow-hidden py-28 md:py-36 bg-cream">
+    <section id="schedule" className="relative overflow-hidden py-16 md:py-24 bg-cream">
       <FloatingBotanicals mirror />
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <Reveal>
